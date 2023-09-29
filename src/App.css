@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.koala {
+  transition: transform 0.1s ease; /* Transition douce lors du changement de la transformation */
+}
+
+.koala:active {
+  transform: scale(0.9); /* Réduit le koala à 90% de sa taille d'origine lorsqu'il est cliqué */
+}
+
+.koalaFlying {
+  position: absolute;
+  width: 50px;
+  transition: transform 1s ease-out; /* animation douce */
+  opacity: 0; /* initialement caché */
+}
+
