@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function IncrClique({
-  count, onBuyUpgrade, prix, cpt, multiplicateur,
+function AutoClick({
+  count, autoClick, prix, cpt, multiplicateur,
 }) {
   return (
     <button
       type="button"
-      onClick={onBuyUpgrade}
+      onClick={autoClick}
       disabled={count < prix}
       style={{ opacity: count < prix * multiplicateur ? 0.5 : 1 }}
     >
-      Koala Click
+      Auto Koala
       <br />
-      +1 Koala per click
+      +1 Koala every seconds
       <br />
-      Coût:
+      Cost:
       {prix * multiplicateur}
       <br />
       {cpt}
@@ -23,12 +23,12 @@ function IncrClique({
   );
 }
 
-IncrClique.propTypes = {
+AutoClick.propTypes = {
   count: PropTypes.number.isRequired,
-  onBuyUpgrade: PropTypes.func.isRequired,
+  autoClick: PropTypes.func.isRequired,
   prix: PropTypes.number.isRequired,
   cpt: PropTypes.number.isRequired,
   multiplicateur: PropTypes.number.isRequired,
 };
 
-export default IncrClique;
+export default AutoClick;
