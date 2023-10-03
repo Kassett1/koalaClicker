@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function AutoClick({
-  score, onBuy, upgrade, multiplier,
+function ClickUpgrade({
+  score, onBuy, upgrade, totalCost,
 }) {
-  // Calcul du coût en fonction du multiplicateur
-  const totalCost = upgrade.price * multiplier;
-
   return (
     <button
       type="button"
@@ -14,9 +11,12 @@ function AutoClick({
       disabled={score < totalCost}
       style={{ backgroundColor: score < totalCost ? 'gray' : 'green' }}
     >
-      AutoClick Upgrade
+      Click Upgrade
       <br />
-      +1 Koala per second
+      +
+      {upgrade.value}
+      {' '}
+      Koala per click
       <br />
       Coût:
       {' '}
@@ -29,7 +29,7 @@ function AutoClick({
   );
 }
 
-AutoClick.propTypes = {
+ClickUpgrade.propTypes = {
   score: PropTypes.number.isRequired,
   onBuy: PropTypes.func.isRequired,
   upgrade: PropTypes.shape({
@@ -38,6 +38,7 @@ AutoClick.propTypes = {
     count: PropTypes.number,
   }).isRequired,
   multiplier: PropTypes.number.isRequired,
+  totalCost: PropTypes.number.isRequired,
 };
 
-export default AutoClick;
+export default ClickUpgrade;

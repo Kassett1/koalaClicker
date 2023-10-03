@@ -5,10 +5,14 @@ function KoalaButton({ onClick }) {
   return (
     <img
       src="/images/koala.png"
-      alt="Cliquez-moi!"
+      alt="Clickable Koala"
       onClick={onClick}
       className="koala"
-      style={{ cursor: 'pointer' }}
+      style={{
+        cursor: 'pointer',
+        width: '600px',
+        height: '600px',
+      }}
     />
   );
 }

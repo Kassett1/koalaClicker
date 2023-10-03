@@ -1,92 +1,130 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Compteur from './Composants/Compteur';
+import Counter from './Composants/Counter';
 import FlyingKoala from './Composants/FlyingKoala';
 import KoalaButton from './Composants/KoalaButton';
-import IncrClique from './Composants/IncrClique';
+import ClickUpgrade from './Composants/ClickUpgrade';
 import AutoClick from './Composants/AutoClick';
-import Multiplicateur from './Composants/Multiplicateur';
+import Multiplier from './Composants/Multiplier';
 import './css/App.css';
 import './css/reset.css';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [koalasFlying, setKoalasFlying] = useState([]);
-  const [clickValue, setClickValue] = useState(1000000);
-  const [autoClickValue, setAutoClickValue] = useState(0);
-  const [prix, setPrixValue] = useState(50);
-  const [prixAutoClick, setPrixACValue] = useState(1000);
-  const [cpt, setCpt] = useState(0);
-  const [cptAC, setCptAC] = useState(0);
+  // Groupement des états liés
+  const [score, setScore] = useState(0);
+  const [flyingKoalas, setFlyingKoalas] = useState([]);
+
+  const [clickUpgrade, setClickUpgrade] = useState({
+    value: 1000000,
+    price: 50,
+    count: 0,
+  });
+
+  const [autoClick, setAutoClick] = useState({
+    value: 0,
+    price: 1000,
+    count: 0,
+  });
+
   const [multiplier, setMultiplier] = useState(1);
 
-  const autoClickValueRef = useRef(autoClickValue);
+  const autoClickValueRef = useRef(autoClick.value);
 
-  const flyingKoala = () => {
+  // Fonction pour générer un FlyingKoala à l'écran
+  const spawnFlyingKoala = () => {
     const newKoala = {
       id: Date.now(),
       top: `${Math.random() * window.innerHeight}px`,
       left: `${Math.random() * window.innerWidth}px`,
     };
-    setKoalasFlying([...koalasFlying, newKoala]);
+    setFlyingKoalas([...flyingKoalas, newKoala]);
 
     setTimeout(() => {
-      setKoalasFlying((prevKoalas) => prevKoalas.filter((koala) => koala.id !== newKoala.id));
+      setFlyingKoalas((prevKoalas) => prevKoalas.filter((koala) => koala.id !== newKoala.id));
     }, 1000);
   };
 
-  const incrementCounter = () => {
-    setCount(count + clickValue);
-    flyingKoala();
+  // Fonction pour incrémenter le score
+  const incrementScore = () => {
+    setScore(score + clickUpgrade.value);
+    spawnFlyingKoala();
   };
 
-  const incrementAutoClick = () => {
-    setCount((prevCount) => prevCount + autoClickValueRef.current);
+  // Fonction pour l'auto-clic
+  const applyAutoClick = () => {
+    setScore((prevScore) => prevScore + autoClickValueRef.current);
   };
 
-  const buyUpgrade = () => {
-    const totalCost = prix * multiplier;
-    setCount(count - Math.ceil(totalCost));
-    setClickValue(clickValue + multiplier);
-    setPrixValue(Math.ceil(prix * 1.2 * multiplier));
-    setCpt(cpt + multiplier);
+  // Fonction de calcul des coûts des augmentation
+  const calculateTotalCost = (baseCost, multiplierArg, minPercent, maxPercent) => {
+    let total = 0;
+    let baseCostCopy = baseCost;
+
+    for (let i = 0; i < multiplierArg; i += 1) {
+      total += baseCostCopy;
+      const randomIncrement = minPercent + (Math.random() * (maxPercent - minPercent));
+      baseCostCopy = Math.ceil(baseCostCopy * (1 + randomIncrement / 100));
+    }
+
+    return total;
   };
 
-  const autoClick = () => {
-    const totalCost = prixAutoClick * multiplier * 1.2;
-    setCount(count - Math.ceil(totalCost));
-    setAutoClickValue((prevValue) => prevValue + multiplier);
-    autoClickValueRef.current = autoClickValue + multiplier;
-    setPrixACValue(Math.ceil(totalCost));
-    setCptAC(cptAC + multiplier);
+  // Fonction pour acheter l'amélioration de clic
+  // Fonction pour acheter l'amélioration de clic
+  const buyClickUpgrade = () => {
+    const totalCost = calculateTotalCost(clickUpgrade.price, multiplier, 2.5, 4);
+    if (score >= totalCost) {
+      setScore(score - totalCost);
+      setClickUpgrade((prev) => ({
+        ...prev,
+        value: prev.value + multiplier,
+        price: totalCost,
+        count: prev.count + multiplier,
+      }));
+    }
+  };
+
+  // Fonction pour acheter l'amélioration d'auto-clic
+  const buyAutoClickUpgrade = () => {
+    const totalCost = autoClick.price * multiplier;
+    if (score >= totalCost) {
+      setScore(score - totalCost);
+      const newValue = autoClick.value + 1;
+      setAutoClick((prev) => ({
+        ...prev,
+        value: newValue,
+        price: prev.price * 1.5,
+        count: prev.count + 1,
+      }));
+      autoClickValueRef.current = newValue;
+    }
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      incrementAutoClick();
-    }, 1000);
+    // Crée un interval pour appliquer l'auto-clic toutes les secondes
+    const interval = setInterval(applyAutoClick, 1000);
 
+    // Nettoie l'intervalle lorsque le composant est démonté ou mis à jour
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="App">
-      <Compteur count={count} />
-      <KoalaButton onClick={incrementCounter} />
-      <FlyingKoala koalasFlying={koalasFlying} />
-      <Multiplicateur setMultiplier={setMultiplier} multiplicateur={multiplier} />
-      <IncrClique
-        count={count}
-        onBuyUpgrade={buyUpgrade}
-        prix={prix}
-        cpt={cpt}
-        multiplicateur={multiplier}
+      <Counter score={score} />
+      <KoalaButton onClick={incrementScore} />
+      <FlyingKoala koalas={flyingKoalas} />
+      <Multiplier setMultiplier={setMultiplier} multiplier={multiplier} />
+      <ClickUpgrade
+        score={score}
+        onBuy={buyClickUpgrade}
+        upgrade={clickUpgrade}
+        multiplier={multiplier}
+        totalCost={calculateTotalCost(clickUpgrade.price, multiplier, 2.5, 4)}
       />
       <AutoClick
-        count={count}
-        autoClick={autoClick}
-        prix={prixAutoClick}
-        cpt={cptAC}
-        multiplicateur={multiplier}
+        score={score}
+        onBuy={buyAutoClickUpgrade}
+        upgrade={autoClick}
+        multiplier={multiplier}
       />
     </div>
   );
