@@ -5,7 +5,8 @@ import KoalaButton from './Composants/KoalaButton';
 import IncrClique from './Composants/IncrClique';
 import AutoClick from './Composants/AutoClick';
 import Multiplicateur from './Composants/Multiplicateur';
-import './App.css';
+import './css/App.css';
+import './css/reset.css';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -44,18 +45,18 @@ function App() {
 
   const buyUpgrade = () => {
     const totalCost = prix * multiplier;
-    setCount(count - totalCost);
+    setCount(count - Math.ceil(totalCost));
     setClickValue(clickValue + multiplier);
-    setPrixValue(prix * 1.2 * multiplier);
+    setPrixValue(Math.ceil(prix * 1.2 * multiplier));
     setCpt(cpt + multiplier);
   };
 
   const autoClick = () => {
-    const totalCost = prixAutoClick * multiplier;
-    setCount(count - totalCost);
+    const totalCost = prixAutoClick * multiplier * 1.2;
+    setCount(count - Math.ceil(totalCost));
     setAutoClickValue((prevValue) => prevValue + multiplier);
     autoClickValueRef.current = autoClickValue + multiplier;
-    setPrixACValue(prixAutoClick * 1.5 * multiplier);
+    setPrixACValue(Math.ceil(totalCost));
     setCptAC(cptAC + multiplier);
   };
 
@@ -72,7 +73,7 @@ function App() {
       <Compteur count={count} />
       <KoalaButton onClick={incrementCounter} />
       <FlyingKoala koalasFlying={koalasFlying} />
-      <Multiplicateur setMultiplier={setMultiplier} />
+      <Multiplicateur setMultiplier={setMultiplier} multiplicateur={multiplier} />
       <IncrClique
         count={count}
         onBuyUpgrade={buyUpgrade}
