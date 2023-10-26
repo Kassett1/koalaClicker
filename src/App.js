@@ -5,11 +5,10 @@ import KoalaButton from './Composants/KoalaButton';
 import ClickUpgrade from './Composants/ClickUpgrade';
 import AutoClick from './Composants/AutoClick';
 import Multiplier from './Composants/Multiplier';
-import './css/App.css';
 import './css/reset.css';
+import './css/App.css';
 
 function App() {
-  // Groupement des états liés
   const [score, setScore] = useState(0);
   const [flyingKoalas, setFlyingKoalas] = useState([]);
 
@@ -55,13 +54,18 @@ function App() {
   };
 
   // Fonction de calcul des coûts des augmentation
-  const calculateTotalCost = (baseCost, multiplierArg, minPercent, maxPercent) => {
+  const calculateTotalCost = (
+    baseCost,
+    multiplierArg,
+    minPercent,
+    maxPercent,
+  ) => {
     let total = 0;
     let baseCostCopy = baseCost;
 
     for (let i = 0; i < multiplierArg; i += 1) {
       total += baseCostCopy;
-      const randomIncrement = minPercent + (Math.random() * (maxPercent - minPercent));
+      const randomIncrement = minPercent + Math.random() * (maxPercent - minPercent);
       baseCostCopy = Math.ceil(baseCostCopy * (1 + randomIncrement / 100));
     }
 
@@ -69,15 +73,19 @@ function App() {
   };
 
   // Fonction pour acheter l'amélioration de clic
-  // Fonction pour acheter l'amélioration de clic
   const buyClickUpgrade = () => {
-    const totalCost = calculateTotalCost(clickUpgrade.price, multiplier, 2.5, 4);
+    const totalCost = calculateTotalCost(
+      clickUpgrade.price,
+      multiplier,
+      2.5,
+      4,
+    );
     if (score >= totalCost) {
-      setScore(score - totalCost);
+      setScore(score - Math.ceil(totalCost));
       setClickUpgrade((prev) => ({
         ...prev,
         value: prev.value + multiplier,
-        price: totalCost,
+        price: Math.ceil(totalCost),
         count: prev.count + multiplier,
       }));
     }
@@ -87,12 +95,12 @@ function App() {
   const buyAutoClickUpgrade = () => {
     const totalCost = autoClick.price * multiplier;
     if (score >= totalCost) {
-      setScore(score - totalCost);
+      setScore(score - Math.ceil(totalCost));
       const newValue = autoClick.value + 1;
       setAutoClick((prev) => ({
         ...prev,
         value: newValue,
-        price: prev.price * 1.5,
+        price: Math.ceil(prev.price * 1.5),
         count: prev.count + 1,
       }));
       autoClickValueRef.current = newValue;
@@ -109,23 +117,29 @@ function App() {
 
   return (
     <div className="App">
-      <Counter score={score} />
-      <KoalaButton onClick={incrementScore} />
+      <section className="cptBouton">
+        <Counter score={score} />
+        <KoalaButton onClick={incrementScore} />
+      </section>
       <FlyingKoala koalas={flyingKoalas} />
-      <Multiplier setMultiplier={setMultiplier} multiplier={multiplier} />
-      <ClickUpgrade
-        score={score}
-        onBuy={buyClickUpgrade}
-        upgrade={clickUpgrade}
-        multiplier={multiplier}
-        totalCost={calculateTotalCost(clickUpgrade.price, multiplier, 2.5, 4)}
-      />
-      <AutoClick
-        score={score}
-        onBuy={buyAutoClickUpgrade}
-        upgrade={autoClick}
-        multiplier={multiplier}
-      />
+      <Multiplier className="multiplier" setMultiplier={setMultiplier} multiplier={multiplier} />
+      <section className="ameliorations">
+        <ClickUpgrade
+          className="clickUpgrade"
+          score={score}
+          onBuy={buyClickUpgrade}
+          upgrade={clickUpgrade}
+          multiplier={multiplier}
+          totalCost={calculateTotalCost(clickUpgrade.price, multiplier, 2.5, 4)}
+        />
+        <AutoClick
+          className="autoClick"
+          score={score}
+          onBuy={buyAutoClickUpgrade}
+          upgrade={autoClick}
+          multiplier={multiplier}
+        />
+      </section>
     </div>
   );
 }

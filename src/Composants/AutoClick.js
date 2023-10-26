@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../css/reset.css';
+import '../css/App.css';
 
 function AutoClick({
   score, onBuy, upgrade, multiplier,
@@ -9,10 +11,11 @@ function AutoClick({
 
   return (
     <button
+      className="upgrades"
       type="button"
       onClick={onBuy}
       disabled={score < totalCost}
-      style={{ backgroundColor: score < totalCost ? 'gray' : 'green' }}
+      style={{ backgroundColor: score < totalCost ? '#5EB9FA' : '#75DE5B' }}
     >
       AutoClick Upgrade
       <br />

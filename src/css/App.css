@@ -1,56 +1,87 @@
-.App {
-  text-align: center;
+@import '/src/fonts/fonts.css';
+
+/* ----------Général---------- */
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background-color: #519FD6;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.upgrades {
+  border-radius: 1vw;
+  height: 6vw;
+  width: 9vw;
+  border: 0.2vw solid #FFFFFF;
+}
+
+.upgrades:active{
+  transform: scale(0.98);
+}
+
+/* ----------App---------- */
+.cptBouton {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.ameliorations {
+  background-color: #326285;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ----------Counter---------- */
+.counter{
+  margin-top: 2vw;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: #FAEA5E;
+  border-radius: 1vw;
+  padding: 0.2vw;
+  width: 10vw;
+  border: 0.2vw solid black;
+}
+
+.counter p{
   color: white;
+  font-size: 2vw;
+  font-family: 'Fredoka One', sans-serif;
+  margin-right: 1vw;
+  position: relative;
+  text-shadow:
+  -0.1vw -0.1vw 0 black,
+   0.1vw -0.1vw 0 black,
+  -0.1vw  0.1vw 0 black,
+   0.1vw  0.1vw 0 black;
+
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.moneyImg {
+  width: 4vw;
+  height: auto;
 }
 
 
+/* ----------KoalaButton---------- */
 
 .koala {
-  transition: transform 0.1s ease; /* Transition douce lors du changement de la transformation */
+  height: 25vw;
+  width: auto;
+  transition: transform 0.1s ease;
+  cursor: pointer;
 }
 
 .koala:active {
-  transform: scale(0.9); /* Réduit le koala à 90% de sa taille d'origine lorsqu'il est cliqué */
+  transform: scale(0.9);
 }
-
-.koalaFlying {
-  position: absolute;
-  width: 50px;
-  transition: transform 1s ease-out; /* animation douce */
-  opacity: 0; /* initialement caché */
-}
-

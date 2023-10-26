@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../css/reset.css';
+import '../css/App.css';
 
 function KoalaButton({ onClick }) {
   return (
-    <img
-      src="/images/koala.png"
-      alt="Clickable Koala"
-      onClick={onClick}
-      className="koala"
-      style={{
-        cursor: 'pointer',
-        width: '600px',
-        height: '600px',
-      }}
-    />
+    <div>
+      <div className="circle" />
+      <img
+        src="/images/koala.png"
+        alt="Clickable Koala"
+        onClick={onClick}
+        className="koala"
+      />
+    </div>
   );
 }
 
