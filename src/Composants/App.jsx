@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Counter from './Composants/Counter';
-import FlyingKoala from './Composants/FlyingKoala';
-import KoalaButton from './Composants/KoalaButton';
-import ClickUpgrade from './Composants/ClickUpgrade';
-import AutoClick from './Composants/AutoClick';
-import Multiplier from './Composants/Multiplier';
-import './css/reset.css';
-import './css/App.css';
+import Counter from './Counter';
+import FlyingKoala from './FlyingKoala';
+import KoalaButton from './KoalaButton';
+import ClickUpgrade from './ClickUpgrade';
+import AutoClick from './AutoClick';
+import Multiplier from './Multiplier';
+import '../css/reset.css';
+import '../css/App.css';
 
 function App() {
   const [score, setScore] = useState(0);
@@ -108,10 +108,7 @@ function App() {
   };
 
   useEffect(() => {
-    // Crée un interval pour appliquer l'auto-clic toutes les secondes
     const interval = setInterval(applyAutoClick, 1000);
-
-    // Nettoie l'intervalle lorsque le composant est démonté ou mis à jour
     return () => clearInterval(interval);
   }, []);
 
