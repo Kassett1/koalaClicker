@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Counter from './Counter';
 import FlyingKoala from './FlyingKoala';
 import KoalaButton from './KoalaButton';
@@ -11,22 +11,8 @@ import '../css/App.css';
 function App() {
   const [score, setScore] = useState(0);
   const [flyingKoalas, setFlyingKoalas] = useState([]);
-
-  const [clickUpgrade, setClickUpgrade] = useState({
-    value: 1000000,
-    price: 50,
-    count: 0,
-  });
-
-  const [autoClick, setAutoClick] = useState({
-    value: 0,
-    price: 1000,
-    count: 0,
-  });
-
   const [multiplier, setMultiplier] = useState(1);
-
-  const autoClickValueRef = useRef(autoClick.value);
+  const [clickValue, setClickValue] = useState(0);
 
   // Fonction pour générer un FlyingKoala à l'écran
   const spawnFlyingKoala = () => {
@@ -44,73 +30,9 @@ function App() {
 
   // Fonction pour incrémenter le score
   const incrementScore = () => {
-    setScore(score + clickUpgrade.value);
+    setScore(score + clickValue);
     spawnFlyingKoala();
   };
-
-  // Fonction pour l'auto-clic
-  const applyAutoClick = () => {
-    setScore((prevScore) => prevScore + autoClickValueRef.current);
-  };
-
-  // Fonction de calcul des coûts des augmentation
-  const calculateTotalCost = (
-    baseCost,
-    multiplierArg,
-    minPercent,
-    maxPercent,
-  ) => {
-    let total = 0;
-    let baseCostCopy = baseCost;
-
-    for (let i = 0; i < multiplierArg; i += 1) {
-      total += baseCostCopy;
-      const randomIncrement = minPercent + Math.random() * (maxPercent - minPercent);
-      baseCostCopy = Math.ceil(baseCostCopy * (1 + randomIncrement / 100));
-    }
-
-    return total;
-  };
-
-  // Fonction pour acheter l'amélioration de clic
-  const buyClickUpgrade = () => {
-    const totalCost = calculateTotalCost(
-      clickUpgrade.price,
-      multiplier,
-      2.5,
-      4,
-    );
-    if (score >= totalCost) {
-      setScore(score - Math.ceil(totalCost));
-      setClickUpgrade((prev) => ({
-        ...prev,
-        value: prev.value + multiplier,
-        price: Math.ceil(totalCost),
-        count: prev.count + multiplier,
-      }));
-    }
-  };
-
-  // Fonction pour acheter l'amélioration d'auto-clic
-  const buyAutoClickUpgrade = () => {
-    const totalCost = autoClick.price * multiplier;
-    if (score >= totalCost) {
-      setScore(score - Math.ceil(totalCost));
-      const newValue = autoClick.value + 1;
-      setAutoClick((prev) => ({
-        ...prev,
-        value: newValue,
-        price: Math.ceil(prev.price * 1.5),
-        count: prev.count + 1,
-      }));
-      autoClickValueRef.current = newValue;
-    }
-  };
-
-  useEffect(() => {
-    const interval = setInterval(applyAutoClick, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <div className="App">
@@ -124,16 +46,14 @@ function App() {
         <ClickUpgrade
           className="clickUpgrade"
           score={score}
-          onBuy={buyClickUpgrade}
-          upgrade={clickUpgrade}
+          setScore={setScore}
           multiplier={multiplier}
-          totalCost={calculateTotalCost(clickUpgrade.price, multiplier, 2.5, 4)}
+          update={setClickValue}
         />
         <AutoClick
           className="autoClick"
           score={score}
-          onBuy={buyAutoClickUpgrade}
-          upgrade={autoClick}
+          setScore={setScore}
           multiplier={multiplier}
         />
       </section>

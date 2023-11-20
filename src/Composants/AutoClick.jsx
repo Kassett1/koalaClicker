@@ -1,45 +1,65 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../css/reset.css';
 import '../css/App.css';
 
 function AutoClick({
-  score, onBuy, upgrade, multiplier,
+  score, setScore, multiplier,
 }) {
-  // Calcul du coût en fonction du multiplicateur
-  const totalCost = upgrade.price * multiplier;
+  const [autoClick, setAutoClick] = useState({
+    value: 0,
+    price: 1000,
+    count: 0,
+  });
+
+  const autoClickValueRef = useRef(autoClick.value);
+
+  const applyAutoClick = () => {
+    setScore((prevScore) => prevScore + autoClickValueRef.current);
+  };
+
+  const buyAutoClickUpgrade = () => {
+    const totalCost = autoClick.price * multiplier;
+    if (score >= totalCost) {
+      setScore(score - Math.ceil(totalCost));
+      const newValue = autoClick.value + 1;
+      setAutoClick((prev) => ({
+        ...prev,
+        value: newValue,
+        price: Math.ceil(prev.price * 1.5),
+        count: prev.count + 1,
+      }));
+      autoClickValueRef.current = newValue;
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(applyAutoClick, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <button
       className="upgrades"
       type="button"
-      onClick={onBuy}
-      disabled={score < totalCost}
-      style={{ backgroundColor: score < totalCost ? '#5EB9FA' : '#75DE5B' }}
+      onClick={buyAutoClickUpgrade}
+      disabled={score < (autoClick.price * multiplier)}
+      style={{ backgroundColor: score < (autoClick.price * multiplier) ? '#5EB9FA' : '#75DE5B' }}
     >
-      AutoClick Upgrade
+      Cost:
       <br />
-      +1 Koala per second
+      {autoClick.price * multiplier}
       <br />
-      Coût:
-      {' '}
-      {totalCost}
+      Amount:
       <br />
-      Améliorations achetées:
-      {' '}
-      {upgrade.count}
+      {autoClick.count}
     </button>
   );
 }
 
 AutoClick.propTypes = {
   score: PropTypes.number.isRequired,
-  onBuy: PropTypes.func.isRequired,
-  upgrade: PropTypes.shape({
-    value: PropTypes.number,
-    price: PropTypes.number,
-    count: PropTypes.number,
-  }).isRequired,
+  setScore: PropTypes.func.isRequired,
   multiplier: PropTypes.number.isRequired,
 };
 
