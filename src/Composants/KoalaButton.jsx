@@ -33,7 +33,6 @@ function KoalaButton({
 
   return (
     <div>
-      <div className="circle" />
       <img
         src="/images/koala.png"
         alt="Clickable Koala"

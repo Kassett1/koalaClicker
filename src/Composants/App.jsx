@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+
+import '../css/reset.css';
+import '../css/App.css';
+
 import Counter from './Counter';
 import CounterDiamond from './CounterDiamond';
 import FlyingKoala from './FlyingKoala';
@@ -6,8 +10,7 @@ import KoalaButton from './KoalaButton';
 import ClickUpgrade from './ClickUpgrade';
 import AutoClick from './AutoClick';
 import Multiplier from './Multiplier';
-import '../css/reset.css';
-import '../css/App.css';
+import DiamondChest from './DiamondChest';
 
 function App() {
   const [money, setMoney] = useState(0);
@@ -44,6 +47,7 @@ function App() {
           click={clickValue}
         />
       </section>
+      <DiamondChest diamond={diamond} setDiamond={setDiamond} />
       <FlyingKoala koalas={flyingKoalas} />
       <Multiplier className="multiplier" setMultiplier={setMultiplier} multiplier={multiplier} />
       <section className="ameliorations">
