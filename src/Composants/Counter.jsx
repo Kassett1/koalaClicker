@@ -6,10 +6,10 @@ import '../css/App.css';
 function Counter({ money }) {
   return (
     <div
-      className="counter"
+      className="Counter"
     >
-      <p>{money}</p>
-      <img src="/images/teteKoala.png" alt="money" className="moneyImg" />
+      <p className="Counter__money">{money}</p>
+      <img src="/images/teteKoala.png" alt="money" className="Counter__img" />
     </div>
   );
 }

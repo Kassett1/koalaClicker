@@ -63,19 +63,18 @@ function AutoClick({ money, setMoney, multiplier }) {
 
   return (
     <button
-      className="upgrades"
+      className="Autoclick upgrades"
       type="button"
       onClick={buyAutoClickUpgrade}
       disabled={money < calculateTotalCost()} // Désactive le bouton si la money est insuffisante.
-      style={{ backgroundColor: money < calculateTotalCost() ? '#5EB9FA' : '#75DE5B' }} // Change la couleur du bouton selon la disponibilité de l'achat.
+      style={{ backgroundColor: money < calculateTotalCost() ? '#5EB9FA' : '#75DE5B' }}
     >
-      Cost:
-      <br />
-      {calculateTotalCost()}
-      <br />
-      Amount:
-      <br />
-      {autoClick.count}
+      <ul className="Autoclick__list">
+        <li className="Autoclick__item">Cost:</li>
+        <li className="Autoclick__item">{calculateTotalCost()}</li>
+        <li className="Autoclick__item">Amount:</li>
+        <li className="Autoclick__item">{autoClick.count}</li>
+      </ul>
     </button>
   );
 }

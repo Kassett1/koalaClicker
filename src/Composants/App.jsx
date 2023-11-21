@@ -34,10 +34,12 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <section className="cptBouton">
-        <Counter money={money} />
-        <CounterDiamond diamond={diamond} />
+    <main className="App">
+      <section className="App__counters">
+        <Counter money={money} className="App__money" />
+        <CounterDiamond diamond={diamond} className="App__diamonds" />
+      </section>
+      <section className="App__koalaButton">
         <KoalaButton
           money={money}
           setMoney={setMoney}
@@ -45,27 +47,28 @@ function App() {
           setDiamond={setDiamond}
           spawn={spawnFlyingKoala}
           click={clickValue}
+          className="App__koala"
         />
       </section>
-      <DiamondChest diamond={diamond} setDiamond={setDiamond} />
-      <FlyingKoala koalas={flyingKoalas} />
-      <Multiplier className="multiplier" setMultiplier={setMultiplier} multiplier={multiplier} />
-      <section className="ameliorations">
+      <DiamondChest diamond={diamond} setDiamond={setDiamond} className="App__chest" />
+      <FlyingKoala koalas={flyingKoalas} className="App__flying-koala" />
+      <Multiplier className="App__multiplier" setMultiplier={setMultiplier} multiplier={multiplier} />
+      <section className="App__upgrades">
         <ClickUpgrade
-          className="clickUpgrade"
+          className="App__clickUpgrade"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}
           update={setClickValue}
         />
         <AutoClick
-          className="autoClick"
+          className="App__autoClick"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}
         />
       </section>
-    </div>
+    </main>
   );
 }
 

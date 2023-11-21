@@ -6,10 +6,10 @@ import '../css/App.css';
 function CounterDiamond({ diamond }) {
   return (
     <div
-      className="counter"
+      className="Counter-diamond"
     >
-      <p>{diamond}</p>
-      <img src="/images/diamond.png" alt="money" className="diamondImg" />
+      <p className="Counter-diamond__diamond">{diamond}</p>
+      <img src="/images/diamond.png" alt="diamonds" className="Counter-diamond__img" />
     </div>
   );
 }

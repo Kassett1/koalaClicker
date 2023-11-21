@@ -37,12 +37,12 @@ function DiamondChest({ diamond, setDiamond }) {
   }, [timeLeft]);
 
   return (
-    <div>
+    <div className="Diamond-chest">
       <img
         src="/images/chest.png"
         alt="chest"
         onClick={handleClick}
-        className={isClickable ? 'chest' : 'chestDisable'}
+        className={isClickable ? 'Diamond-chest__img' : 'Diamond-chest__img--disable'}
       />
       <p className={isClickable ? 'hidden' : ''}>{timeLeftDisplay}</p>
     </div>

@@ -62,19 +62,18 @@ function ClickUpgrade({
 
   return (
     <button
-      className="upgrades clickButton"
+      className="Click upgrades"
       type="button"
       onClick={buyClickUpgrade}
       disabled={money < calculateTotalCost()} // Désactive le bouton si la est insuffisante.
-      style={{ backgroundColor: money < calculateTotalCost() ? '#5EB9FA' : '#75DE5B' }} // Change la couleur du bouton en fonction de la money.
+      style={{ backgroundColor: money < calculateTotalCost() ? '#5EB9FA' : '#75DE5B' }}
     >
-      Cost:
-      <br />
-      {calculateTotalCost()}
-      <br />
-      Amount:
-      <br />
-      {clickUpgrade.count}
+      <ul className="Click__list">
+        <li className="Click__item">Cost:</li>
+        <li className="Click__item">{calculateTotalCost()}</li>
+        <li className="Click__item">Amount:</li>
+        <li className="Click__item">{clickUpgrade.count}</li>
+      </ul>
     </button>
   );
 }
