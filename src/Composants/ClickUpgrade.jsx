@@ -4,7 +4,7 @@ import '../css/reset.css';
 import '../css/App.css';
 
 function ClickUpgrade({
-  score, setScore, multiplier, update,
+  money, setMoney, multiplier, update,
 }) {
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
   const [clickUpgrade, setClickUpgrade] = useState({
@@ -13,7 +13,7 @@ function ClickUpgrade({
     count: 0,
   });
 
-  const priceAugment = 1.25;
+  const priceAugment = 1.1;
 
   // Calcul du coût total des améliorations en fonction du multiplicateur.
   const calculateTotalCost = () => {
@@ -46,9 +46,9 @@ function ClickUpgrade({
   const buyClickUpgrade = () => {
     const totalCost = calculateTotalCost();
 
-    // Score est suffisant ou non pour acheter les améliorations.
-    if (score >= totalCost) {
-      setScore(score - totalCost); // Déduit le coût du score.
+    // money est suffisant ou non pour acheter les améliorations.
+    if (money >= totalCost) {
+      setMoney(money - totalCost);
       const newPrice = Math.ceil(clickUpgrade.price * (priceAugment ** multiplier));
       // MAJ de la valeur, du prix de l'amélioration et du compteur.
       updateClickValue(multiplier, newPrice);
@@ -65,8 +65,8 @@ function ClickUpgrade({
       className="upgrades clickButton"
       type="button"
       onClick={buyClickUpgrade}
-      disabled={score < calculateTotalCost()} // Désactive le bouton si le score est insuffisant.
-      style={{ backgroundColor: score < calculateTotalCost() ? '#5EB9FA' : '#75DE5B' }} // Change la couleur du bouton en fonction du score.
+      disabled={money < calculateTotalCost()} // Désactive le bouton si la est insuffisante.
+      style={{ backgroundColor: money < calculateTotalCost() ? '#5EB9FA' : '#75DE5B' }} // Change la couleur du bouton en fonction de la money.
     >
       Cost:
       <br />
@@ -80,8 +80,8 @@ function ClickUpgrade({
 }
 
 ClickUpgrade.propTypes = {
-  score: PropTypes.number.isRequired,
-  setScore: PropTypes.func.isRequired,
+  money: PropTypes.number.isRequired,
+  setMoney: PropTypes.func.isRequired,
   multiplier: PropTypes.number.isRequired,
   update: PropTypes.func.isRequired,
 };

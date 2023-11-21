@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../css/reset.css';
 import '../css/App.css';
 
-function AutoClick({ score, setScore, multiplier }) {
+function AutoClick({ money, setMoney, multiplier }) {
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
   const [autoClick, setAutoClick] = useState({
     value: 0,
@@ -12,13 +12,14 @@ function AutoClick({ score, setScore, multiplier }) {
   });
 
   const priceAugment = 2;
+  const autoClickPower = 10;
 
   // Référence pour maintenir la valeur actuelle de l'auto-click pour l'effet.
   const autoClickValueRef = useRef(autoClick.value);
 
   // Fonction pour appliquer l'effet de l'auto-click.
   const applyAutoClick = () => {
-    setScore((prevScore) => prevScore + autoClickValueRef.current);
+    setMoney((prevMoney) => prevMoney + autoClickValueRef.current);
   };
 
   // Calcul du coût total pour l'achat des auto-clicks en fonction du multiplicateur.
@@ -39,11 +40,11 @@ function AutoClick({ score, setScore, multiplier }) {
   const buyAutoClickUpgrade = () => {
     const totalCost = calculateTotalCost();
 
-    // Vérifie si le score est suffisant pour l'achat.
-    if (score >= totalCost) {
-      setScore(score - totalCost); // Déduit le coût de l'achat du score.
+    // Vérifie si la money est suffisante pour l'achat.
+    if (money >= totalCost) {
+      setMoney(money - totalCost);
       const newPrice = Math.ceil(autoClick.price * (priceAugment ** multiplier));
-      const newValue = autoClick.value + (10 * multiplier);
+      const newValue = autoClick.value + (autoClickPower * multiplier);
       setAutoClick((prev) => ({
         ...prev,
         value: newValue,
@@ -65,8 +66,8 @@ function AutoClick({ score, setScore, multiplier }) {
       className="upgrades"
       type="button"
       onClick={buyAutoClickUpgrade}
-      disabled={score < calculateTotalCost()} // Désactive le bouton si le score est insuffisant.
-      style={{ backgroundColor: score < calculateTotalCost() ? '#5EB9FA' : '#75DE5B' }} // Change la couleur du bouton selon la disponibilité de l'achat.
+      disabled={money < calculateTotalCost()} // Désactive le bouton si la money est insuffisante.
+      style={{ backgroundColor: money < calculateTotalCost() ? '#5EB9FA' : '#75DE5B' }} // Change la couleur du bouton selon la disponibilité de l'achat.
     >
       Cost:
       <br />
@@ -80,8 +81,8 @@ function AutoClick({ score, setScore, multiplier }) {
 }
 
 AutoClick.propTypes = {
-  score: PropTypes.number.isRequired,
-  setScore: PropTypes.func.isRequired,
+  money: PropTypes.number.isRequired,
+  setMoney: PropTypes.func.isRequired,
   multiplier: PropTypes.number.isRequired,
 };
 

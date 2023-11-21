@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Counter from './Counter';
+import CounterDiamond from './CounterDiamond';
 import FlyingKoala from './FlyingKoala';
 import KoalaButton from './KoalaButton';
 import ClickUpgrade from './ClickUpgrade';
@@ -9,7 +10,8 @@ import '../css/reset.css';
 import '../css/App.css';
 
 function App() {
-  const [score, setScore] = useState(0);
+  const [money, setMoney] = useState(0);
+  const [diamond, setDiamond] = useState(0);
   const [flyingKoalas, setFlyingKoalas] = useState([]);
   const [multiplier, setMultiplier] = useState(1);
   const [clickValue, setClickValue] = useState(0);
@@ -31,10 +33,13 @@ function App() {
   return (
     <div className="App">
       <section className="cptBouton">
-        <Counter score={score} />
+        <Counter money={money} />
+        <CounterDiamond diamond={diamond} />
         <KoalaButton
-          score={score}
-          setScore={setScore}
+          money={money}
+          setMoney={setMoney}
+          diamond={diamond}
+          setDiamond={setDiamond}
           spawn={spawnFlyingKoala}
           click={clickValue}
         />
@@ -44,15 +49,15 @@ function App() {
       <section className="ameliorations">
         <ClickUpgrade
           className="clickUpgrade"
-          score={score}
-          setScore={setScore}
+          money={money}
+          setMoney={setMoney}
           multiplier={multiplier}
           update={setClickValue}
         />
         <AutoClick
           className="autoClick"
-          score={score}
-          setScore={setScore}
+          money={money}
+          setMoney={setMoney}
           multiplier={multiplier}
         />
       </section>

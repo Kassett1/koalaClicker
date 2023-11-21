@@ -67,7 +67,7 @@ body {
 
 }
 
-.moneyImg {
+.moneyImg, .diamondImg {
   width: 4vw;
   height: auto;
 }
