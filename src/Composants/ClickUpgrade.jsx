@@ -13,6 +13,8 @@ function ClickUpgrade({
     count: 0,
   });
 
+  const priceAugment = 1.25;
+
   // Calcul du coût total des améliorations en fonction du multiplicateur.
   const calculateTotalCost = () => {
     let total = 0;
@@ -21,7 +23,7 @@ function ClickUpgrade({
     // Ajout du coût de chaque amélioration (+4% à chaque fois).
     for (let i = 0; i < multiplier; i += 1) {
       total += newPrice;
-      newPrice = Math.ceil(newPrice * 1.04);
+      newPrice = Math.ceil(newPrice * priceAugment);
     }
 
     return total;
@@ -47,7 +49,7 @@ function ClickUpgrade({
     // Score est suffisant ou non pour acheter les améliorations.
     if (score >= totalCost) {
       setScore(score - totalCost); // Déduit le coût du score.
-      const newPrice = Math.ceil(clickUpgrade.price * (1.04 ** multiplier));
+      const newPrice = Math.ceil(clickUpgrade.price * (priceAugment ** multiplier));
       // MAJ de la valeur, du prix de l'amélioration et du compteur.
       updateClickValue(multiplier, newPrice);
     }

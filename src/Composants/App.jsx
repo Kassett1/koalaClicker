@@ -28,17 +28,16 @@ function App() {
     }, 1000);
   };
 
-  // Fonction pour incrémenter le score
-  const incrementScore = () => {
-    setScore(score + clickValue);
-    spawnFlyingKoala();
-  };
-
   return (
     <div className="App">
       <section className="cptBouton">
         <Counter score={score} />
-        <KoalaButton onClick={incrementScore} />
+        <KoalaButton
+          score={score}
+          setScore={setScore}
+          spawn={spawnFlyingKoala}
+          click={clickValue}
+        />
       </section>
       <FlyingKoala koalas={flyingKoalas} />
       <Multiplier className="multiplier" setMultiplier={setMultiplier} multiplier={multiplier} />
