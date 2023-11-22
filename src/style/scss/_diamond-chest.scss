@@ -1,3 +1,5 @@
+@import 'variables';
+
 .diamond-chest {
     display: flex;
     flex-direction: column;
@@ -23,12 +25,7 @@
     letter-spacing: 0.1vw;
     position: absolute;
     top: 16vh;
-
-    text-shadow:
-      -0.1vw -0.1vw 0 black,
-       0.1vw -0.1vw 0 black,
-      -0.1vw  0.1vw 0 black,
-       0.1vw  0.1vw 0 black;
+    text-shadow: $textBorder;
 
        &--hidden{
         display: none;

@@ -1,5 +1,6 @@
 @charset "UTF-8";
-@import '/src/fonts/fonts.css';
+/* -----Colors----- */
+/* -----Borders-----*/
 /* ----------Général---------- */
 *,
 *:after,
@@ -33,9 +34,11 @@ body {
   top: 3vh;
 }
 
+/* -----Colors----- */
+/* -----Borders-----*/
 .counter {
   background-color: #FAEA5E;
-  border: 0.2vw solid black;
+  border: 0.15vw solid black;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -56,9 +59,11 @@ body {
   width: auto;
 }
 
+/* -----Colors----- */
+/* -----Borders-----*/
 .counter-diamond {
   background-color: #FAEA5E;
-  border: 0.2vw solid black;
+  border: 0.15vw solid black;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -92,6 +97,8 @@ body {
   transform: scale(0.9);
 }
 
+/* -----Colors----- */
+/* -----Borders-----*/
 .diamond-chest {
   display: flex;
   flex-direction: column;
@@ -121,4 +128,37 @@ body {
   display: none;
 }
 
-@i;/*# sourceMappingURL=main.css.map */
+/* -----Colors----- */
+/* -----Borders-----*/
+.multiplier {
+  display: flex;
+  flex-direction: row;
+  gap: 0.2vw;
+  padding: 1.2vh 0;
+  position: relative;
+  width: 15vw;
+}
+.multiplier::before {
+  content: "";
+  background-color: #FAEA5E;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  z-index: -1;
+  border-radius: 0.8vw;
+}
+.multiplier__button {
+  height: 6vh;
+  width: 5vw;
+  border-radius: 0.8vw;
+  border: 0.15vw solid black;
+}
+.multiplier__button--green {
+  background-color: #75DE5B;
+}
+.multiplier__button--grey {
+  background-color: #D9D9D9;
+}/*# sourceMappingURL=main.css.map */

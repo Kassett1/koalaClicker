@@ -1,0 +1,38 @@
+@import 'variables';
+
+.multiplier {
+    display: flex;
+    flex-direction: row;
+    gap: 0.2vw;
+    padding: 1.2vh 0;
+    position: relative;
+    width: 15vw;
+
+    &::before {
+        content: '';
+        background-color: $yellow;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        z-index: -1;
+        border-radius: 0.8vw;
+    }
+
+    &__button{
+        height: 6vh;
+        width: 5vw;
+        border-radius: 0.8vw;
+        border: $border;
+
+        &--green{
+           background-color: $green; 
+        }
+
+        &--grey{
+            background-color: $grey;
+        }
+    }
+}

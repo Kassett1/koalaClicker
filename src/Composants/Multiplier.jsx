@@ -5,13 +5,13 @@ function Multiplier({ setMultiplier, multiplier }) {
   const multipliers = [1, 10, 50, 100];
 
   return (
-    <div>
+    <div className="multiplier">
       {multipliers.map((m) => (
         <button
           key={m}
           type="button"
           onClick={() => setMultiplier(m)}
-          style={{ backgroundColor: m === multiplier ? 'green' : 'gray' }}
+          className={m === multiplier ? 'multiplier__button multiplier__button--green' : 'multiplier__button multiplier__button--grey'}
         >
           {m}
           x

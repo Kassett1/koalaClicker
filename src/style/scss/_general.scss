@@ -1,4 +1,5 @@
-@import '/src/fonts/fonts.css';
+@import 'variables';
+
 
 /* ----------Général---------- */
 *,
@@ -12,6 +13,6 @@ html {
 }
 
 body {
-  background-color: #519FD6;
+  background-color: $backgroundBlue;
   font-family: 'Fredoka', sans-serif;
 }

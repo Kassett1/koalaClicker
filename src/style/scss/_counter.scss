@@ -1,6 +1,8 @@
+@import 'variables';
+
 .counter{
-    background-color: #FAEA5E;
-    border: 0.2vw solid black;
+    background-color: $yellow;
+    border: $border;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -12,11 +14,7 @@
     &__money{
         color: white;
         font-size: 2vw;
-        text-shadow:
-      -0.1vw -0.1vw 0 black,
-       0.1vw -0.1vw 0 black,
-      -0.1vw  0.1vw 0 black,
-       0.1vw  0.1vw 0 black;
+        text-shadow: $textBorder;
        margin-right: 1vw;
        letter-spacing: 0.1vw;
     }
