@@ -34,12 +34,12 @@ function App() {
   };
 
   return (
-    <main className="App">
-      <section className="App__counters">
-        <Counter money={money} className="App__money" />
-        <CounterDiamond diamond={diamond} className="App__diamonds" />
+    <main className="app">
+      <section className="app__counters">
+        <Counter money={money} className="app__money" />
+        <CounterDiamond diamond={diamond} className="app__diamonds" />
       </section>
-      <section className="App__koalaButton">
+      <section className="app__koalaButton">
         <KoalaButton
           money={money}
           setMoney={setMoney}
@@ -47,22 +47,22 @@ function App() {
           setDiamond={setDiamond}
           spawn={spawnFlyingKoala}
           click={clickValue}
-          className="App__koala"
+          className="app__koala"
         />
       </section>
-      <DiamondChest diamond={diamond} setDiamond={setDiamond} className="App__chest" />
-      <FlyingKoala koalas={flyingKoalas} className="App__flying-koala" />
-      <Multiplier className="App__multiplier" setMultiplier={setMultiplier} multiplier={multiplier} />
-      <section className="App__upgrades">
+      <DiamondChest diamond={diamond} setDiamond={setDiamond} className="app__chest" />
+      <FlyingKoala koalas={flyingKoalas} className="app__flying-koala" />
+      <Multiplier className="app__multiplier" setMultiplier={setMultiplier} multiplier={multiplier} />
+      <section className="app__upgrades">
         <ClickUpgrade
-          className="App__clickUpgrade"
+          className="app__clickUpgrade"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}
           update={setClickValue}
         />
         <AutoClick
-          className="App__autoClick"
+          className="app__autoClick"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}

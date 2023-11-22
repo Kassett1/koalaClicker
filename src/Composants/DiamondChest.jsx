@@ -1,6 +1,4 @@
 import PropTypes from 'prop-types';
-import '../css/reset.css';
-import '../css/App.css';
 import { useEffect, useState } from 'react';
 
 function DiamondChest({ diamond, setDiamond }) {
@@ -37,14 +35,14 @@ function DiamondChest({ diamond, setDiamond }) {
   }, [timeLeft]);
 
   return (
-    <div className="Diamond-chest">
+    <div className="diamond-chest">
       <img
         src="/images/chest.png"
         alt="chest"
         onClick={handleClick}
-        className={isClickable ? 'Diamond-chest__img' : 'Diamond-chest__img--disable'}
+        className={isClickable ? 'diamond-chest__img' : 'diamond-chest__img diamond-chest__img--disable'}
       />
-      <p className={isClickable ? 'hidden' : ''}>{timeLeftDisplay}</p>
+      <p className={isClickable ? 'diamond-chest__timer diamond-chest__timer--hidden' : 'diamond-chest__timer'}>{timeLeftDisplay}</p>
     </div>
   );
 }

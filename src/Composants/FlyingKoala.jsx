@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../css/reset.css';
-import '../css/App.css';
 
 function FlyingKoala({ koalas }) {
   return (
-    <div>
+    <div className="flying-koala">
       {koalas.map((koala) => (
         <img
           key={koala.id}
           src="/images/teteKoala.png"
           alt="Flying Koala"
-          className="flyingKoala"
+          className="flying-koala__img"
           style={{
             position: 'absolute',
             top: koala.top,

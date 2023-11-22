@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../css/reset.css';
-import '../css/App.css';
 
 function KoalaButton({
   money, setMoney, diamond, setDiamond, spawn, click,
@@ -14,8 +12,6 @@ function KoalaButton({
 
     // Chaque clique a entre MIN et MAX % de chance de générer un diamant
     const dropChance = randomInRange(0.5, 2);
-    console.log(`percent ${percent}`);
-    console.log(`drop chance ${dropChance}`);
 
     if (percent <= dropChance) {
       // Nombre de diamant généré aléatoirement entre MIN et MAX
@@ -32,12 +28,12 @@ function KoalaButton({
   };
 
   return (
-    <div>
+    <div className="koala-button">
       <img
         src="/images/koala.png"
         alt="Clickable Koala"
         onClick={incrementMoney}
-        className="koala"
+        className="koala-button__img"
       />
     </div>
   );

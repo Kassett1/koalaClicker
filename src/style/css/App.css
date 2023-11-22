@@ -71,7 +71,7 @@ body {
 
 }
 
-.Counter__img, .Counter-diamond__img {
+.counter__img, .counter-diamond__img {
   width: 4vw;
   height: auto;
 }
@@ -91,11 +91,11 @@ body {
 }
 
 /* ----------KoalaButton---------- */
-.Diamond-chest__img, .Diamond-chest__img--disable {
+.diamond-chest__img, .diamond-chest__img--disable {
   height: 10vw;
   transition: transform 0.1s ease;
 }
 
-.Diamond-chest__img--disable{
+.diamond-chest__img--disable{
   filter: grayscale(80%);
 }

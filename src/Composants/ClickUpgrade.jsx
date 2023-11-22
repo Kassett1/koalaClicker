@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import '../css/reset.css';
-import '../css/App.css';
 
 function ClickUpgrade({
   money, setMoney, multiplier, update,
@@ -62,17 +60,17 @@ function ClickUpgrade({
 
   return (
     <button
-      className="Click upgrades"
+      className="click upgrades"
       type="button"
       onClick={buyClickUpgrade}
       disabled={money < calculateTotalCost()} // Désactive le bouton si la est insuffisante.
       style={{ backgroundColor: money < calculateTotalCost() ? '#5EB9FA' : '#75DE5B' }}
     >
-      <ul className="Click__list">
-        <li className="Click__item">Cost:</li>
-        <li className="Click__item">{calculateTotalCost()}</li>
-        <li className="Click__item">Amount:</li>
-        <li className="Click__item">{clickUpgrade.count}</li>
+      <ul className="click__list">
+        <li className="click__item">Cost:</li>
+        <li className="click__item">{calculateTotalCost()}</li>
+        <li className="click__item">Amount:</li>
+        <li className="click__item">{clickUpgrade.count}</li>
       </ul>
     </button>
   );

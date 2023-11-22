@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import '../css/reset.css';
-import '../css/App.css';
 
 function AutoClick({ money, setMoney, multiplier }) {
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
@@ -63,17 +61,17 @@ function AutoClick({ money, setMoney, multiplier }) {
 
   return (
     <button
-      className="Autoclick upgrades"
+      className="autoclick upgrades"
       type="button"
       onClick={buyAutoClickUpgrade}
       disabled={money < calculateTotalCost()} // Désactive le bouton si la money est insuffisante.
       style={{ backgroundColor: money < calculateTotalCost() ? '#5EB9FA' : '#75DE5B' }}
     >
-      <ul className="Autoclick__list">
-        <li className="Autoclick__item">Cost:</li>
-        <li className="Autoclick__item">{calculateTotalCost()}</li>
-        <li className="Autoclick__item">Amount:</li>
-        <li className="Autoclick__item">{autoClick.count}</li>
+      <ul className="autoclick__list">
+        <li className="autoclick__item">Cost:</li>
+        <li className="autoclick__item">{calculateTotalCost()}</li>
+        <li className="autoclick__item">Amount:</li>
+        <li className="autoclick__item">{autoClick.count}</li>
       </ul>
     </button>
   );
