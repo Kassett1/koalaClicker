@@ -1,0 +1,13 @@
+.koala-button {
+  text-align: center;
+  &__img {
+    height: 23vw;
+    width: auto;
+    transition: transform 0.1s ease;
+    cursor: pointer;
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@import '/src/fonts/fonts.css';
+
+/* ----------Général---------- */
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #519FD6;
+  font-family: 'Fredoka', sans-serif;
+}

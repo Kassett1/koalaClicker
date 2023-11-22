@@ -1,0 +1,19 @@
+.app {
+    position: relative;
+
+    &__counters{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 3vw;
+        margin-top: 4.5vh;
+        margin-bottom: 4.5vh;
+    }
+
+    &__diamond-chest{
+        position: absolute;
+        right: 5vw;
+        top: 3vh;
+    }
+
+}

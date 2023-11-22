@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import '../css/reset.css';
-import '../css/App.css';
+import '../style/css/reset.css';
+import '../style/css/main.css';
 
 import Counter from './Counter';
 import CounterDiamond from './CounterDiamond';
@@ -39,18 +39,18 @@ function App() {
         <Counter money={money} className="app__money" />
         <CounterDiamond diamond={diamond} className="app__diamonds" />
       </section>
-      <section className="app__koalaButton">
-        <KoalaButton
-          money={money}
-          setMoney={setMoney}
-          diamond={diamond}
-          setDiamond={setDiamond}
-          spawn={spawnFlyingKoala}
-          click={clickValue}
-          className="app__koala"
-        />
+      <KoalaButton
+        money={money}
+        setMoney={setMoney}
+        diamond={diamond}
+        setDiamond={setDiamond}
+        spawn={spawnFlyingKoala}
+        click={clickValue}
+        className="app__koalaButton"
+      />
+      <section className="app__diamond-chest">
+        <DiamondChest diamond={diamond} setDiamond={setDiamond} className="app__chest" />
       </section>
-      <DiamondChest diamond={diamond} setDiamond={setDiamond} className="app__chest" />
       <FlyingKoala koalas={flyingKoalas} className="app__flying-koala" />
       <Multiplier className="app__multiplier" setMultiplier={setMultiplier} multiplier={multiplier} />
       <section className="app__upgrades">

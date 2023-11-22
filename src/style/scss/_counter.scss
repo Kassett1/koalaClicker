@@ -1,0 +1,29 @@
+.counter{
+    background-color: #FAEA5E;
+    border: 0.2vw solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 12vw;
+    border-radius: 1vw;
+    padding: 0.2vh 0;
+
+    &__money{
+        color: white;
+        font-size: 2vw;
+        text-shadow:
+      -0.1vw -0.1vw 0 black,
+       0.1vw -0.1vw 0 black,
+      -0.1vw  0.1vw 0 black,
+       0.1vw  0.1vw 0 black;
+       margin-right: 1vw;
+       letter-spacing: 0.1vw;
+    }
+
+    &__img{
+        height: 5vh;
+        width: auto;
+    }
+    
+}

@@ -1,1 +1,124 @@
-/*# sourceMappingURL=main.css.map */
+@charset "UTF-8";
+@import '/src/fonts/fonts.css';
+/* ----------Général---------- */
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #519FD6;
+  font-family: "Fredoka", sans-serif;
+}
+
+.app {
+  position: relative;
+}
+.app__counters {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3vw;
+  margin-top: 4.5vh;
+  margin-bottom: 4.5vh;
+}
+.app__diamond-chest {
+  position: absolute;
+  right: 5vw;
+  top: 3vh;
+}
+
+.counter {
+  background-color: #FAEA5E;
+  border: 0.2vw solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 12vw;
+  border-radius: 1vw;
+  padding: 0.2vh 0;
+}
+.counter__money {
+  color: white;
+  font-size: 2vw;
+  text-shadow: -0.1vw -0.1vw 0 black, 0.1vw -0.1vw 0 black, -0.1vw 0.1vw 0 black, 0.1vw 0.1vw 0 black;
+  margin-right: 1vw;
+  letter-spacing: 0.1vw;
+}
+.counter__img {
+  height: 5vh;
+  width: auto;
+}
+
+.counter-diamond {
+  background-color: #FAEA5E;
+  border: 0.2vw solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 12vw;
+  border-radius: 1vw;
+  padding: 0.2vh 0;
+}
+.counter-diamond__diamond {
+  color: white;
+  font-size: 2vw;
+  text-shadow: -0.1vw -0.1vw 0 black, 0.1vw -0.1vw 0 black, -0.1vw 0.1vw 0 black, 0.1vw 0.1vw 0 black;
+  margin-right: 1vw;
+  letter-spacing: 0.1vw;
+}
+.counter-diamond__img {
+  height: 5vh;
+  width: auto;
+}
+
+.koala-button {
+  text-align: center;
+}
+.koala-button__img {
+  height: 23vw;
+  width: auto;
+  transition: transform 0.1s ease;
+  cursor: pointer;
+}
+.koala-button__img:active {
+  transform: scale(0.9);
+}
+
+.diamond-chest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.diamond-chest__img {
+  height: 8vw;
+  transition: transform 0.1s ease;
+}
+.diamond-chest__img:active {
+  transform: scale(0.9);
+}
+.diamond-chest__img--disable {
+  height: 8vw;
+  filter: grayscale(80%);
+}
+.diamond-chest__timer {
+  color: white;
+  font-size: 3vh;
+  letter-spacing: 0.1vw;
+  position: absolute;
+  top: 16vh;
+  text-shadow: -0.1vw -0.1vw 0 black, 0.1vw -0.1vw 0 black, -0.1vw 0.1vw 0 black, 0.1vw 0.1vw 0 black;
+}
+.diamond-chest__timer--hidden {
+  display: none;
+}
+
+@i;/*# sourceMappingURL=main.css.map */
