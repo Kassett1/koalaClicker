@@ -1,5 +1,4 @@
-@import 'variables';
-
+@import "variables";
 
 /* ----------Général---------- */
 *,
@@ -14,5 +13,37 @@ html {
 
 body {
   background-color: $backgroundBlue;
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
+  max-height: 100vh;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/public/images/stars.gif");
+    background-position: 5vw 30vw;
+    background-repeat: no-repeat;
+    background-size: 20vw;
+    transform: rotate(45deg);
+    z-index: -1;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/public/images/stars.gif");
+    background-position: 54vw 15vw;
+    background-repeat: no-repeat;
+    background-size: 20vw;
+    transform: rotate(-45deg);
+    z-index: -1;
+  }
 }

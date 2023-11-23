@@ -9,7 +9,7 @@ function AutoClick({ money, setMoney, multiplier }) {
     count: 0,
   });
 
-  const priceAugment = 2;
+  const priceAugment = 1.05;
   const autoClickPower = 10;
 
   // Référence pour maintenir la valeur actuelle de l'auto-click pour l'effet.
@@ -61,18 +61,13 @@ function AutoClick({ money, setMoney, multiplier }) {
 
   return (
     <button
-      className="autoclick upgrades"
+      className={money < calculateTotalCost() ? 'upgrade upgrade--cant-buy' : 'upgrade upgrade--buy'}
       type="button"
       onClick={buyAutoClickUpgrade}
-      disabled={money < calculateTotalCost()} // Désactive le bouton si la money est insuffisante.
-      style={{ backgroundColor: money < calculateTotalCost() ? '#5EB9FA' : '#75DE5B' }}
+      disabled={money < calculateTotalCost()}
     >
-      <ul className="autoclick__list">
-        <li className="autoclick__item">Cost:</li>
-        <li className="autoclick__item">{calculateTotalCost()}</li>
-        <li className="autoclick__item">Amount:</li>
-        <li className="autoclick__item">{autoClick.count}</li>
-      </ul>
+      <p className="upgrade__name upgrade--buy__nale upgrade--cant-buy__name">Click</p>
+      <p className="upgrade__cost upgrade--buy__cost upgrade--cant-buy__cost">{`$${calculateTotalCost()}`}</p>
     </button>
   );
 }

@@ -48,9 +48,7 @@ function App() {
         click={clickValue}
         className="app__koalaButton"
       />
-      <section className="app__diamond-chest">
-        <DiamondChest diamond={diamond} setDiamond={setDiamond} className="app__chest" />
-      </section>
+      <DiamondChest diamond={diamond} setDiamond={setDiamond} className="app__chest" />
       <FlyingKoala koalas={flyingKoalas} className="app__flying-koala" />
       <Multiplier className="app__multiplier" setMultiplier={setMultiplier} multiplier={multiplier} />
       <section className="app__upgrades">
@@ -60,6 +58,54 @@ function App() {
           setMoney={setMoney}
           multiplier={multiplier}
           update={setClickValue}
+        />
+        <AutoClick
+          className="app__autoClick"
+          money={money}
+          setMoney={setMoney}
+          multiplier={multiplier}
+        />
+        <AutoClick
+          className="app__autoClick"
+          money={money}
+          setMoney={setMoney}
+          multiplier={multiplier}
+        />
+        <AutoClick
+          className="app__autoClick"
+          money={money}
+          setMoney={setMoney}
+          multiplier={multiplier}
+        />
+        <AutoClick
+          className="app__autoClick"
+          money={money}
+          setMoney={setMoney}
+          multiplier={multiplier}
+        />
+        <AutoClick
+          className="app__autoClick"
+          money={money}
+          setMoney={setMoney}
+          multiplier={multiplier}
+        />
+        <AutoClick
+          className="app__autoClick"
+          money={money}
+          setMoney={setMoney}
+          multiplier={multiplier}
+        />
+        <AutoClick
+          className="app__autoClick"
+          money={money}
+          setMoney={setMoney}
+          multiplier={multiplier}
+        />
+        <AutoClick
+          className="app__autoClick"
+          money={money}
+          setMoney={setMoney}
+          multiplier={multiplier}
         />
         <AutoClick
           className="app__autoClick"

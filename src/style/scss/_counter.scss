@@ -1,27 +1,27 @@
-@import 'variables';
+@import "variables";
 
-.counter{
-    background-color: $yellow;
-    border: $border;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 12vw;
-    border-radius: 1vw;
-    padding: 0.2vh 0;
+.counter {
+  background-color: $yellow;
+  border: $border;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 12vw;
+  border-radius: 1vw;
+  padding: 0.2vh 0;
 
-    &__money{
-        color: white;
-        font-size: 2vw;
-        text-shadow: $textBorder;
-       margin-right: 1vw;
-       letter-spacing: 0.1vw;
-    }
+  &__money {
+    color: white;
+    font-size: 2vw;
+    text-shadow: $textBorder;
+    margin-right: 1vw;
+    letter-spacing: 0.1vw;
+    font-weight: bold;
+  }
 
-    &__img{
-        height: 5vh;
-        width: auto;
-    }
-    
+  &__img {
+    height: 5vh;
+    width: auto;
+  }
 }

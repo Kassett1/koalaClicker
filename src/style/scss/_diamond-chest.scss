@@ -1,13 +1,16 @@
-@import 'variables';
+@import "variables";
 
 .diamond-chest {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  right: 5vw;
+  top: 3vh;
 
   &__img {
     height: 8vw;
+    cursor: pointer;
     transition: transform 0.1s ease;
     &:active {
       transform: scale(0.9);
@@ -19,7 +22,7 @@
     filter: grayscale(80%);
   }
 
-  &__timer{
+  &__timer {
     color: white;
     font-size: 3vh;
     letter-spacing: 0.1vw;
@@ -27,8 +30,8 @@
     top: 16vh;
     text-shadow: $textBorder;
 
-       &--hidden{
-        display: none;
-       }
+    &--hidden {
+      display: none;
+    }
   }
 }

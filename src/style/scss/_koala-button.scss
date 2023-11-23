@@ -1,7 +1,17 @@
+@import "variables";
+
 .koala-button {
+  position: relative;
   text-align: center;
+  top: 2vh;
+  background-image: url("/public/images/grass.png"),
+    url("/public/images/grass.png");
+  background-position: 26vw 15vw, 54vw 15vw;
+  background-repeat: no-repeat;
+  background-size: 20vw;
+
   &__img {
-    height: 23vw;
+    height: 25vw;
     width: auto;
     transition: transform 0.1s ease;
     cursor: pointer;
@@ -9,5 +19,19 @@
     &:active {
       transform: scale(0.9);
     }
+  }
+
+  &::before {
+    content: "";
+    width: 40vw;
+    height: 40vw;
+    background-color: $lightBlue;
+    border: 0.3vw solid white;
+    border-radius: 50%;
+    position: absolute;
+    top: 85%; /* Positionne le cercle au centre verticalement */
+    left: 50%; /* Positionne le cercle au centre horizontalement */
+    transform: translate(-50%, -50%);
+    z-index: -1;
   }
 }

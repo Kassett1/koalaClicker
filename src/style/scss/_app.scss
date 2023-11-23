@@ -1,19 +1,34 @@
+@import "variables";
+
 .app {
+  height: 95vh;
+
+  &__counters {
+    margin-top: 3vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3vw;
+  }
+
+  &__upgrades {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5vw;
+    justify-content: center;
+    padding: 5vh 5vw;
+    background-color: $darkBlue;
     position: relative;
+    top: 2.2vh;
+    background-image: url('/public/images/grass.png'), url('/public/images/grass.png'), url('/public/images/grass.png');
+    background-position: -10vw 2vw, 35vw 2vw, 80vw 2vw;
+    background-repeat: no-repeat;
+    background-size: 30vw;
 
-    &__counters{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 3vw;
-        margin-top: 4.5vh;
-        margin-bottom: 4.5vh;
+    & > * {
+      flex: 1 0 16%;
+      max-width: 16%;
     }
-
-    &__diamond-chest{
-        position: absolute;
-        right: 5vw;
-        top: 3vh;
-    }
-
+  }
 }

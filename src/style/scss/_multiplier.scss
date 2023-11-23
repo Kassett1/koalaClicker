@@ -1,38 +1,51 @@
-@import 'variables';
+@import "variables";
 
 .multiplier {
-    display: flex;
-    flex-direction: row;
-    gap: 0.2vw;
-    padding: 1.2vh 0;
-    position: relative;
-    width: 15vw;
+  display: flex;
+  flex-direction: row;
+  gap: 0.2vw;
+  padding: 1.2vh 0;
+  position: absolute;
+  width: 15vw;
+  left: 5vw;
+  top: 45vh;
 
-    &::before {
-        content: '';
-        background-color: $yellow;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%;
-        z-index: -1;
-        border-radius: 0.8vw;
+  &::before {
+    content: "";
+    background-color: $yellow;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 54%;
+    transform: translateX(-50%);
+    width: 90%;
+    z-index: -1;
+    border-radius: 0.8vw;
+  }
+
+  &__button {
+    height: 6vh;
+    width: 5vw;
+    border-radius: 0.8vw;
+    border: $border;
+    transition: transform 0.1s ease;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 2vw;
+    text-shadow: $textBorder;
+
+    &--green {
+      background-color: $green;
     }
 
-    &__button{
-        height: 6vh;
-        width: 5vw;
-        border-radius: 0.8vw;
-        border: $border;
-
-        &--green{
-           background-color: $green; 
-        }
-
-        &--grey{
-            background-color: $grey;
-        }
+    &--grey {
+      background-color: $grey;
     }
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
 }

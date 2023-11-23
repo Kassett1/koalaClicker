@@ -1,0 +1,42 @@
+@import 'variables';
+
+.upgrade{
+    border-radius: 0.8vw;
+    padding: 1vh 0;
+    border: 0.2vw solid #FFFFFF;
+    text-shadow: $textBorder;
+    font-size: 2vw;
+
+    &__name{
+        font-family: 'Fredoka', sans-serif;
+        font-weight: bold;
+        color: white;
+    }
+
+    &__cost{
+        font-family: 'Luckiest Guy', cursive;
+    }
+  }
+  
+  .upgrade--buy{
+    cursor: pointer;
+    background-color: $green;
+    transition: transform 0.1s ease;
+  
+    &:active{
+      transform: scale(0.9);
+    }
+
+    &__cost{
+        color: $yellow;
+    }
+
+  }
+  
+  .upgrade--cant-buy{
+    background-color: $lightBlue;
+
+    &__cost{
+        color: $grey;
+    }
+  }

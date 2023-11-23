@@ -11,7 +11,7 @@ function ClickUpgrade({
     count: 0,
   });
 
-  const priceAugment = 1.1;
+  const priceAugment = 1.03;
 
   // Calcul du coût total des améliorations en fonction du multiplicateur.
   const calculateTotalCost = () => {
@@ -60,18 +60,13 @@ function ClickUpgrade({
 
   return (
     <button
-      className="click upgrades"
+      className={money < calculateTotalCost() ? 'upgrade upgrade--cant-buy' : 'upgrade upgrade--buy'}
       type="button"
       onClick={buyClickUpgrade}
       disabled={money < calculateTotalCost()} // Désactive le bouton si la est insuffisante.
-      style={{ backgroundColor: money < calculateTotalCost() ? '#5EB9FA' : '#75DE5B' }}
     >
-      <ul className="click__list">
-        <li className="click__item">Cost:</li>
-        <li className="click__item">{calculateTotalCost()}</li>
-        <li className="click__item">Amount:</li>
-        <li className="click__item">{clickUpgrade.count}</li>
-      </ul>
+      <p className="upgrade__name upgrade--buy__nale upgrade--cant-buy__name">Click</p>
+      <p className="upgrade__cost upgrade--buy__cost upgrade--cant-buy__cost">{`$${calculateTotalCost()}`}</p>
     </button>
   );
 }
