@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function ClickUpgrade({
-  money, setMoney, multiplier, update,
+  money, setMoney, multiplier, update, rebirth,
 }) {
+  const baseValue = 1000000;
+  const basePrice = 50;
+
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
   const [clickUpgrade, setClickUpgrade] = useState({
-    value: 1000000,
-    price: 50,
+    value: baseValue * rebirth,
+    price: basePrice,
     count: 0,
   });
 
@@ -18,7 +21,7 @@ function ClickUpgrade({
     let total = 0;
     let newPrice = clickUpgrade.price;
 
-    // Ajout du coût de chaque amélioration (+4% à chaque fois).
+    // Ajout du coût de chaque amélioration.
     for (let i = 0; i < multiplier; i += 1) {
       total += newPrice;
       newPrice = Math.ceil(newPrice * priceAugment);
@@ -31,13 +34,10 @@ function ClickUpgrade({
   const updateClickValue = (addedValue, newPrice) => {
     setClickUpgrade((prev) => ({
       ...prev,
-      value: prev.value + addedValue,
+      value: prev.value + (addedValue * rebirth),
       price: newPrice,
       count: prev.count + addedValue,
     }));
-
-    // Refléter les changements dans le composant App.
-    update(clickUpgrade.value + addedValue);
   };
 
   // Achat d'améliorations lorsque le bouton est cliqué.
@@ -58,6 +58,15 @@ function ClickUpgrade({
     update(clickUpgrade.value);
   }, [clickUpgrade.value]);
 
+  useEffect(() => {
+    setClickUpgrade((prev) => ({
+      ...prev,
+      value: baseValue * rebirth,
+      price: basePrice,
+      count: 0,
+    }));
+  }, [rebirth]);
+
   return (
     <button
       className={money < calculateTotalCost() ? 'upgrade upgrade--cant-buy' : 'upgrade upgrade--buy'}
@@ -65,8 +74,11 @@ function ClickUpgrade({
       onClick={buyClickUpgrade}
       disabled={money < calculateTotalCost()} // Désactive le bouton si la est insuffisante.
     >
-      <p className="upgrade__name upgrade--buy__nale upgrade--cant-buy__name">Click</p>
-      <p className="upgrade__cost upgrade--buy__cost upgrade--cant-buy__cost">{`$${calculateTotalCost()}`}</p>
+      <p className="upgrade__name">Click</p>
+      <p className={money < calculateTotalCost() ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
+        {`$${calculateTotalCost()}`}
+      </p>
+
     </button>
   );
 }
@@ -76,6 +88,7 @@ ClickUpgrade.propTypes = {
   setMoney: PropTypes.func.isRequired,
   multiplier: PropTypes.number.isRequired,
   update: PropTypes.func.isRequired,
+  rebirth: PropTypes.number.isRequired,
 };
 
 export default ClickUpgrade;

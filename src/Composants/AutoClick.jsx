@@ -1,11 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-function AutoClick({ money, setMoney, multiplier }) {
+function AutoClick({
+  money, setMoney, multiplier, rebirth,
+}) {
+  const baseValue = 0;
+  const basePrice = 1000;
+
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
   const [autoClick, setAutoClick] = useState({
-    value: 0,
-    price: 1000,
+    value: baseValue,
+    price: basePrice,
     count: 0,
   });
 
@@ -25,7 +30,7 @@ function AutoClick({ money, setMoney, multiplier }) {
     let total = 0;
     let newPrice = autoClick.price;
 
-    // Ajout du coût de chaque auto-click, augmentant de 5% à chaque itération.
+    // Ajout du coût de chaque auto-click.
     for (let i = 0; i < multiplier; i += 1) {
       total += newPrice;
       newPrice = Math.ceil(newPrice * priceAugment);
@@ -59,6 +64,16 @@ function AutoClick({ money, setMoney, multiplier }) {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    setAutoClick((prev) => ({
+      ...prev,
+      value: baseValue * rebirth,
+      price: basePrice,
+      count: 0,
+    }));
+    autoClickValueRef.current = baseValue * rebirth;
+  }, [rebirth]);
+
   return (
     <button
       className={money < calculateTotalCost() ? 'upgrade upgrade--cant-buy' : 'upgrade upgrade--buy'}
@@ -66,8 +81,10 @@ function AutoClick({ money, setMoney, multiplier }) {
       onClick={buyAutoClickUpgrade}
       disabled={money < calculateTotalCost()}
     >
-      <p className="upgrade__name upgrade--buy__nale upgrade--cant-buy__name">Click</p>
-      <p className="upgrade__cost upgrade--buy__cost upgrade--cant-buy__cost">{`$${calculateTotalCost()}`}</p>
+      <p className="upgrade__name">Autoclick</p>
+      <p className={money < calculateTotalCost() ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
+        {`$${calculateTotalCost()}`}
+      </p>
     </button>
   );
 }
@@ -76,6 +93,7 @@ AutoClick.propTypes = {
   money: PropTypes.number.isRequired,
   setMoney: PropTypes.func.isRequired,
   multiplier: PropTypes.number.isRequired,
+  rebirth: PropTypes.number.isRequired,
 };
 
 export default AutoClick;

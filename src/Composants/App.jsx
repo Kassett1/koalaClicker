@@ -11,6 +11,7 @@ import ClickUpgrade from './ClickUpgrade';
 import AutoClick from './AutoClick';
 import Multiplier from './Multiplier';
 import DiamondChest from './DiamondChest';
+import Rebirth from './Rebirth';
 
 function App() {
   const [money, setMoney] = useState(0);
@@ -18,6 +19,7 @@ function App() {
   const [flyingKoalas, setFlyingKoalas] = useState([]);
   const [multiplier, setMultiplier] = useState(1);
   const [clickValue, setClickValue] = useState(0);
+  const [rebirthValue, setRebirthValue] = useState(1);
 
   // Fonction pour générer un FlyingKoala à l'écran
   const spawnFlyingKoala = () => {
@@ -58,60 +60,70 @@ function App() {
           setMoney={setMoney}
           multiplier={multiplier}
           update={setClickValue}
+          rebirth={rebirthValue}
         />
         <AutoClick
           className="app__autoClick"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}
+          rebirth={rebirthValue}
         />
         <AutoClick
           className="app__autoClick"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}
+          rebirth={rebirthValue}
         />
         <AutoClick
           className="app__autoClick"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}
+          rebirth={rebirthValue}
         />
         <AutoClick
           className="app__autoClick"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}
+          rebirth={rebirthValue}
         />
         <AutoClick
           className="app__autoClick"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}
+          rebirth={rebirthValue}
         />
         <AutoClick
           className="app__autoClick"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}
+          rebirth={rebirthValue}
         />
         <AutoClick
           className="app__autoClick"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}
+          rebirth={rebirthValue}
         />
         <AutoClick
           className="app__autoClick"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}
+          rebirth={rebirthValue}
         />
-        <AutoClick
-          className="app__autoClick"
+        <Rebirth
+          className="app__rebirth"
           money={money}
           setMoney={setMoney}
           multiplier={multiplier}
+          update={setRebirthValue}
         />
       </section>
     </main>
