@@ -12,6 +12,7 @@ import AutoClick from './AutoClick';
 import Multiplier from './Multiplier';
 import DiamondChest from './DiamondChest';
 import Rebirth from './Rebirth';
+import SpeedAutoClick from './SpeedAutoClick';
 
 function App() {
   const [money, setMoney] = useState(0);
@@ -20,6 +21,7 @@ function App() {
   const [multiplier, setMultiplier] = useState(1);
   const [clickValue, setClickValue] = useState(0);
   const [rebirthValue, setRebirthValue] = useState(1);
+  const [IntervalTime, setIntervalTime] = useState(1000);
 
   // Fonction pour générer un FlyingKoala à l'écran
   const spawnFlyingKoala = () => {
@@ -68,6 +70,7 @@ function App() {
           setMoney={setMoney}
           multiplier={multiplier}
           rebirth={rebirthValue}
+          intervalTime={IntervalTime}
         />
         <AutoClick
           className="app__autoClick"
@@ -111,12 +114,14 @@ function App() {
           multiplier={multiplier}
           rebirth={rebirthValue}
         />
-        <AutoClick
+        <SpeedAutoClick
           className="app__autoClick"
-          money={money}
-          setMoney={setMoney}
+          diamond={diamond}
+          setDiamond={setDiamond}
           multiplier={multiplier}
           rebirth={rebirthValue}
+          setIntervalTime={setIntervalTime}
+          intervalTime={IntervalTime}
         />
         <Rebirth
           className="app__rebirth"

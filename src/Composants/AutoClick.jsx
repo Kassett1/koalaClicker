@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function AutoClick({
-  money, setMoney, multiplier, rebirth,
+  money, setMoney, multiplier, rebirth, intervalTime,
 }) {
   const baseValue = 0;
   const basePrice = 1000;
@@ -60,7 +60,7 @@ function AutoClick({
 
   // Auto-click toutes les secondes.
   useEffect(() => {
-    const interval = setInterval(applyAutoClick, 1000);
+    const interval = setInterval(applyAutoClick, intervalTime);
     return () => clearInterval(interval);
   }, []);
 
@@ -73,6 +73,11 @@ function AutoClick({
     }));
     autoClickValueRef.current = baseValue * rebirth;
   }, [rebirth]);
+
+  useEffect(() => {
+    const interval = setInterval(applyAutoClick, intervalTime);
+    return () => clearInterval(interval);
+  }, [intervalTime]);
 
   return (
     <button
@@ -94,6 +99,7 @@ AutoClick.propTypes = {
   setMoney: PropTypes.func.isRequired,
   multiplier: PropTypes.number.isRequired,
   rebirth: PropTypes.number.isRequired,
+  intervalTime: PropTypes.number.isRequired,
 };
 
 export default AutoClick;
