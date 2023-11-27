@@ -7,7 +7,7 @@ function CounterDiamond({ diamond }) {
       className="counter-diamond"
     >
       <p className="counter-diamond__diamond">{diamond}</p>
-      <img src="/images/diamond.png" alt="diamonds" className="counter-diamond__img" />
+      <img src="/images/diamond.png" alt="diamonds" className="counter-diamond__img" draggable="false" />
     </div>
   );
 }

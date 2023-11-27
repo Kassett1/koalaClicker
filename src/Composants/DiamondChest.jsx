@@ -8,7 +8,7 @@ function DiamondChest({ diamond, setDiamond }) {
 
   const handleClick = () => {
     if (isClickable) {
-      setDiamond(diamond + 50);
+      setDiamond(diamond + 50000);
       setIsClickable(false);
     }
   };
@@ -41,6 +41,7 @@ function DiamondChest({ diamond, setDiamond }) {
         alt="chest"
         onClick={handleClick}
         className={isClickable ? 'diamond-chest__img' : 'diamond-chest__img--disable'}
+        draggable="false"
       />
       <p className={isClickable ? 'diamond-chest__timer diamond-chest__timer--hidden' : 'diamond-chest__timer'}>{timeLeftDisplay}</p>
     </div>

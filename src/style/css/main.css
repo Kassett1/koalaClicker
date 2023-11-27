@@ -23,6 +23,12 @@ body {
   background-size: 20vw;
 }
 
+img {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
 /* -----Colors----- */
 /* -----Borders-----*/
 .app {
@@ -43,6 +49,7 @@ body {
   justify-content: center;
   padding: 5vh 5vw;
   background-color: #326285;
+  box-shadow: 0 -0.4vh 0.5vw -0.3vw rgba(0, 0, 0, 0.5);
   position: relative;
   top: 2.2vh;
   background-image: url("/public/images/grass.png"), url("/public/images/grass.png"), url("/public/images/grass.png");
@@ -230,6 +237,7 @@ body {
   border: 0.2vw solid #FFFFFF;
   text-shadow: -0.1vw -0.1vw 0 black, 0.1vw -0.1vw 0 black, -0.1vw 0.1vw 0 black, 0.1vw 0.1vw 0 black;
   font-size: 2vw;
+  box-shadow: 0.4vw 0.4vh 0.5vw -0.3vw rgba(0, 0, 0, 0.5);
 }
 .upgrade__name {
   font-family: "Fredoka", sans-serif;

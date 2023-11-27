@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-function ClickUpgrade({
+function SuperClick({
   money, setMoney, multiplier, update, rebirth,
 }) {
   const baseValue = 1000000;
@@ -9,7 +9,7 @@ function ClickUpgrade({
 
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
   const [clickUpgrade, setClickUpgrade] = useState({
-    value: baseValue * rebirth,
+    value: baseValue * rebirth * 10,
     price: basePrice,
     count: 0,
   });
@@ -34,7 +34,7 @@ function ClickUpgrade({
   const updateClickValue = (addedValue, newPrice) => {
     setClickUpgrade((prev) => ({
       ...prev,
-      value: prev.value + (addedValue * rebirth),
+      value: prev.value + (addedValue * rebirth * 10),
       price: newPrice,
       count: prev.count + addedValue,
     }));
@@ -61,7 +61,7 @@ function ClickUpgrade({
   useEffect(() => {
     setClickUpgrade((prev) => ({
       ...prev,
-      value: baseValue * rebirth,
+      value: baseValue * rebirth * 10,
       price: basePrice,
       count: 0,
     }));
@@ -74,7 +74,7 @@ function ClickUpgrade({
       onClick={buyClickUpgrade}
       disabled={money < calculateTotalCost()}
     >
-      <p className="upgrade__name">Click</p>
+      <p className="upgrade__name">Super Click</p>
       <p className={money < calculateTotalCost() ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
         {`$${calculateTotalCost()}`}
       </p>
@@ -83,7 +83,7 @@ function ClickUpgrade({
   );
 }
 
-ClickUpgrade.propTypes = {
+SuperClick.propTypes = {
   money: PropTypes.number.isRequired,
   setMoney: PropTypes.func.isRequired,
   multiplier: PropTypes.number.isRequired,
@@ -91,4 +91,4 @@ ClickUpgrade.propTypes = {
   rebirth: PropTypes.number.isRequired,
 };
 
-export default ClickUpgrade;
+export default SuperClick;

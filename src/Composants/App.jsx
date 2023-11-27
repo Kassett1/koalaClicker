@@ -13,15 +13,25 @@ import Multiplier from './Multiplier';
 import DiamondChest from './DiamondChest';
 import Rebirth from './Rebirth';
 import SpeedAutoClick from './SpeedAutoClick';
+import PowerClick from './PowerClick';
+import ColorChange from './ColorChange';
+import DiamondUpgrade from './DiamondUpgrade';
+import AutoDiamond from './AutoDiamond';
+import SuperClick from './SuperClick';
+import SuperAuto from './SuperAuto';
 
 function App() {
   const [money, setMoney] = useState(0);
   const [diamond, setDiamond] = useState(0);
   const [flyingKoalas, setFlyingKoalas] = useState([]);
   const [multiplier, setMultiplier] = useState(1);
-  const [clickValue, setClickValue] = useState(0);
+  const [clickValue, setClickValue] = useState(1);
   const [rebirthValue, setRebirthValue] = useState(1);
   const [IntervalTime, setIntervalTime] = useState(1000);
+  const [hueRotation, setHueRotation] = useState(0);
+  const [saturation, setSaturation] = useState(1);
+  const [brightness, setBrightness] = useState(1);
+  const [diamondUpgrade, setDiamondUpgrade] = useState(0);
 
   // Fonction pour générer un FlyingKoala à l'écran
   const spawnFlyingKoala = () => {
@@ -40,7 +50,13 @@ function App() {
   return (
     <main className="app">
       <section className="app__counters">
-        <Counter money={money} className="app__money" />
+        <Counter
+          money={money}
+          className="app__money"
+          hueRotation={hueRotation}
+          saturation={saturation}
+          brightness={brightness}
+        />
         <CounterDiamond diamond={diamond} className="app__diamonds" />
       </section>
       <KoalaButton
@@ -50,10 +66,20 @@ function App() {
         setDiamond={setDiamond}
         spawn={spawnFlyingKoala}
         click={clickValue}
+        hueRotation={hueRotation}
+        saturation={saturation}
+        brightness={brightness}
+        diamondUpgrade={diamondUpgrade}
         className="app__koalaButton"
       />
       <DiamondChest diamond={diamond} setDiamond={setDiamond} className="app__chest" />
-      <FlyingKoala koalas={flyingKoalas} className="app__flying-koala" />
+      <FlyingKoala
+        koalas={flyingKoalas}
+        className="app__flying-koala"
+        hueRotation={hueRotation}
+        saturation={saturation}
+        brightness={brightness}
+      />
       <Multiplier className="app__multiplier" setMultiplier={setMultiplier} multiplier={multiplier} />
       <section className="app__upgrades">
         <ClickUpgrade
@@ -70,58 +96,16 @@ function App() {
           setMoney={setMoney}
           multiplier={multiplier}
           rebirth={rebirthValue}
-          intervalTime={IntervalTime}
-        />
-        <AutoClick
-          className="app__autoClick"
-          money={money}
-          setMoney={setMoney}
-          multiplier={multiplier}
-          rebirth={rebirthValue}
-        />
-        <AutoClick
-          className="app__autoClick"
-          money={money}
-          setMoney={setMoney}
-          multiplier={multiplier}
-          rebirth={rebirthValue}
-        />
-        <AutoClick
-          className="app__autoClick"
-          money={money}
-          setMoney={setMoney}
-          multiplier={multiplier}
-          rebirth={rebirthValue}
-        />
-        <AutoClick
-          className="app__autoClick"
-          money={money}
-          setMoney={setMoney}
-          multiplier={multiplier}
-          rebirth={rebirthValue}
-        />
-        <AutoClick
-          className="app__autoClick"
-          money={money}
-          setMoney={setMoney}
-          multiplier={multiplier}
-          rebirth={rebirthValue}
-        />
-        <AutoClick
-          className="app__autoClick"
-          money={money}
-          setMoney={setMoney}
-          multiplier={multiplier}
-          rebirth={rebirthValue}
-        />
-        <SpeedAutoClick
-          className="app__autoClick"
-          diamond={diamond}
-          setDiamond={setDiamond}
-          multiplier={multiplier}
-          rebirth={rebirthValue}
           setIntervalTime={setIntervalTime}
           intervalTime={IntervalTime}
+        />
+        <DiamondUpgrade
+          className="app__diamondUpgrade"
+          money={money}
+          setMoney={setMoney}
+          multiplier={multiplier}
+          update={setDiamondUpgrade}
+          rebirth={rebirthValue}
         />
         <Rebirth
           className="app__rebirth"
@@ -129,6 +113,55 @@ function App() {
           setMoney={setMoney}
           multiplier={multiplier}
           update={setRebirthValue}
+        />
+        <ColorChange
+          className="app__colorChange"
+          diamond={diamond}
+          setDiamond={setDiamond}
+          setHueRotation={setHueRotation}
+          setSaturation={setSaturation}
+          setBrightness={setBrightness}
+        />
+        <SuperClick
+          className="app__superclick"
+          money={money}
+          setMoney={setMoney}
+          multiplier={multiplier}
+          update={setClickValue}
+          rebirth={rebirthValue}
+        />
+        <SuperAuto
+          className="app__superauto"
+          money={money}
+          setMoney={setMoney}
+          multiplier={multiplier}
+          rebirth={rebirthValue}
+          setIntervalTime={setIntervalTime}
+          intervalTime={IntervalTime}
+        />
+        <AutoDiamond
+          className="app__autoDiamond"
+          setDiamond={setDiamond}
+          multiplier={multiplier}
+          rebirth={rebirthValue}
+          money={money}
+          setMoney={setMoney}
+        />
+        <PowerClick
+          className="app__power-click"
+          diamond={diamond}
+          setDiamond={setDiamond}
+          clickValue={clickValue}
+          setClickValue={setClickValue}
+        />
+        <SpeedAutoClick
+          className="app__speed-autoclick"
+          diamond={diamond}
+          setDiamond={setDiamond}
+          multiplier={multiplier}
+          rebirth={rebirthValue}
+          setIntervalTime={setIntervalTime}
+          intervalTime={IntervalTime}
         />
       </section>
     </main>

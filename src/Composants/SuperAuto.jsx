@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-function AutoClick({
+function SuperAuto({
   money, setMoney, multiplier, rebirth, intervalTime,
 }) {
   const baseValue = 0;
@@ -9,7 +9,7 @@ function AutoClick({
 
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
   const [autoClick, setAutoClick] = useState({
-    value: baseValue,
+    value: baseValue * 10,
     price: basePrice,
     count: 0,
   });
@@ -47,7 +47,7 @@ function AutoClick({
     if (money >= totalCost) {
       setMoney(money - totalCost);
       const newPrice = Math.ceil(autoClick.price * (priceAugment ** multiplier));
-      const newValue = autoClick.value + (autoClickPower * multiplier);
+      const newValue = autoClick.value + (autoClickPower * multiplier * 10);
       setAutoClick((prev) => ({
         ...prev,
         value: newValue,
@@ -62,7 +62,7 @@ function AutoClick({
   useEffect(() => {
     setAutoClick((prev) => ({
       ...prev,
-      value: baseValue,
+      value: baseValue * 10,
       price: basePrice,
       count: 0,
     }));
@@ -81,7 +81,7 @@ function AutoClick({
       onClick={buyAutoClickUpgrade}
       disabled={money < calculateTotalCost()}
     >
-      <p className="upgrade__name">Autoclick</p>
+      <p className="upgrade__name">Super Auto</p>
       <p className={money < calculateTotalCost() ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
         {`$${calculateTotalCost()}`}
       </p>
@@ -89,7 +89,7 @@ function AutoClick({
   );
 }
 
-AutoClick.propTypes = {
+SuperAuto.propTypes = {
   money: PropTypes.number.isRequired,
   setMoney: PropTypes.func.isRequired,
   multiplier: PropTypes.number.isRequired,
@@ -97,4 +97,4 @@ AutoClick.propTypes = {
   intervalTime: PropTypes.number.isRequired,
 };
 
-export default AutoClick;
+export default SuperAuto;

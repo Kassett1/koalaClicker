@@ -2,7 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function KoalaButton({
-  money, setMoney, diamond, setDiamond, spawn, click,
+  money,
+  setMoney,
+  diamond,
+  setDiamond,
+  spawn,
+  click,
+  hueRotation,
+  saturation,
+  brightness,
+  diamondUpgrade,
 }) {
   // Génère un nombre aléatoire dans un intervalle donné
   const randomInRange = (min, max) => Math.random() * (max - min) + min;
@@ -15,7 +24,7 @@ function KoalaButton({
 
     if (percent <= dropChance) {
       // Nombre de diamant généré aléatoirement entre MIN et MAX
-      return Math.floor(randomInRange(1, 5));
+      return Math.floor(randomInRange(1 * diamondUpgrade, 5 * diamondUpgrade));
     }
     return 0;
   };
@@ -34,6 +43,8 @@ function KoalaButton({
         alt="Clickable Koala"
         onClick={incrementMoney}
         className="koala-button__img"
+        draggable="false"
+        style={{ filter: `hue-rotate(${hueRotation}deg) saturate(${saturation}) brightness(${brightness})` }}
       />
     </div>
   );
@@ -46,6 +57,10 @@ KoalaButton.propTypes = {
   setDiamond: PropTypes.func.isRequired,
   spawn: PropTypes.func.isRequired,
   click: PropTypes.number.isRequired,
+  hueRotation: PropTypes.number.isRequired,
+  saturation: PropTypes.number.isRequired,
+  brightness: PropTypes.number.isRequired,
+  diamondUpgrade: PropTypes.number.isRequired,
 };
 
 export default KoalaButton;

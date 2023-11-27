@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function FlyingKoala({ koalas }) {
+function FlyingKoala({
+  koalas, hueRotation, saturation, brightness,
+}) {
   return (
     <div className="flying-koala">
       {koalas.map((koala) => (
@@ -16,6 +18,7 @@ function FlyingKoala({ koalas }) {
             left: koala.left,
             width: '3vw',
             height: 'auto',
+            filter: `hue-rotate(${hueRotation}deg) saturate(${saturation}) brightness(${brightness})`,
           }}
         />
       ))}
@@ -31,6 +34,9 @@ FlyingKoala.propTypes = {
       left: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  hueRotation: PropTypes.number.isRequired,
+  saturation: PropTypes.number.isRequired,
+  brightness: PropTypes.number.isRequired,
 };
 
 export default FlyingKoala;

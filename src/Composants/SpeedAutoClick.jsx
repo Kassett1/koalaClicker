@@ -8,7 +8,7 @@ function SpeedAutoClick({
   const [isWorking, setIsWorking] = useState(false);
   const [prevIntervalTime, setPrevIntervalTime] = useState(0);
 
-  const buyAutoClickUpgrade = () => {
+  const buySpeed = () => {
     setDiamond(diamond - speedPrice);
     setIsWorking(true);
   };
@@ -35,13 +35,13 @@ function SpeedAutoClick({
 
   return (
     <button
-      className={diamond < speedPrice ? 'upgrade upgrade--cant-buy' : 'upgrade upgrade--buy'}
+      className={diamond < speedPrice || isWorking ? 'upgrade upgrade--cant-buy' : 'upgrade upgrade--buy'}
       type="button"
-      onClick={buyAutoClickUpgrade}
-      disabled={diamond < speedPrice}
+      onClick={buySpeed}
+      disabled={diamond < speedPrice || isWorking}
     >
-      <p className="upgrade__name">Fast Spell</p>
-      <p className={diamond < speedPrice ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
+      <p className="upgrade__name">Auto Speed</p>
+      <p className={diamond < speedPrice || isWorking ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
         <i className="fa-regular fa-gem" />
         {' '}
         {speedPrice}
