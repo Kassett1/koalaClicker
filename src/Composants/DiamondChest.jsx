@@ -8,7 +8,7 @@ function DiamondChest({ diamond, setDiamond }) {
 
   const handleClick = () => {
     if (isClickable) {
-      setDiamond(diamond + 50000);
+      setDiamond(diamond + 500);
       setIsClickable(false);
     }
   };

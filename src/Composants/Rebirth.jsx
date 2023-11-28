@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 function Rebirth({
-  money, setMoney, multiplier, update,
+  money, setMoney, multiplier, update, format,
 }) {
   const [rebirth, setRebirth] = useState({
     value: 1,
@@ -10,7 +10,7 @@ function Rebirth({
     count: 0,
   });
 
-  const priceAugment = 10;
+  const priceAugment = 5;
 
   const calculateTotalCost = () => {
     let total = 0;
@@ -57,7 +57,7 @@ function Rebirth({
     >
       <p className="upgrade__name">Rebirth</p>
       <p className={money < calculateTotalCost() ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
-        {`$${calculateTotalCost()}`}
+        {`$${format(calculateTotalCost())}`}
       </p>
 
     </button>
@@ -69,6 +69,7 @@ Rebirth.propTypes = {
   setMoney: PropTypes.func.isRequired,
   multiplier: PropTypes.number.isRequired,
   update: PropTypes.func.isRequired,
+  format: PropTypes.func.isRequired,
 };
 
 export default Rebirth;

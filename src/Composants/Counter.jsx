@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Counter({
-  money, hueRotation, saturation, brightness,
+  money, hueRotation, saturation, brightness, format,
 }) {
   return (
     <div
       className="counter"
     >
-      <p className="counter__money">{money}</p>
+      <p className="counter__money">{format(money)}</p>
       <img
         src="/images/teteKoala.png"
         alt="money"
@@ -25,6 +25,7 @@ Counter.propTypes = {
   hueRotation: PropTypes.number.isRequired,
   saturation: PropTypes.number.isRequired,
   brightness: PropTypes.number.isRequired,
+  format: PropTypes.func.isRequired,
 };
 
 export default Counter;

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function PowerClick({
-  diamond, setDiamond, clickValue, setClickValue,
+  diamond, setDiamond, clickValue, setClickValue, format,
 }) {
-  const [powerPrice] = useState(10);
+  const [powerPrice] = useState(1000);
   const [isWorking, setIsWorking] = useState(false);
 
   const buyPower = () => {
@@ -30,7 +30,7 @@ function PowerClick({
       <p className={diamond < powerPrice || isWorking ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
         <i className="fa-regular fa-gem" />
         {' '}
-        {powerPrice}
+        {format(powerPrice)}
       </p>
     </button>
   );
@@ -41,6 +41,7 @@ PowerClick.propTypes = {
   setDiamond: PropTypes.func.isRequired,
   clickValue: PropTypes.number.isRequired,
   setClickValue: PropTypes.func.isRequired,
+  format: PropTypes.func.isRequired,
 };
 
 export default PowerClick;

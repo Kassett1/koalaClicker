@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function ColorChange({
   diamond, setDiamond, setHueRotation, setSaturation, setBrightness,
 }) {
-  const [colorPrice] = useState(10);
+  const [colorPrice] = useState(100);
 
   function getRandomValue(min, max, step) {
     const range = (max - min) / step;

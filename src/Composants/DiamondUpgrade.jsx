@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function DiamondUpgrade({
-  money, setMoney, multiplier, update, rebirth,
+  money, setMoney, multiplier, update, rebirth, format,
 }) {
   const baseValue = 0;
-  const basePrice = 50;
+  const basePrice = 5000;
 
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
   const [diamondUpgrade, setDiamondUpgrade] = useState({
@@ -14,7 +14,7 @@ function DiamondUpgrade({
     count: 0,
   });
 
-  const priceAugment = 1.03;
+  const priceAugment = 1.3;
 
   // Calcul du coût total des améliorations en fonction du multiplicateur.
   const calculateTotalCost = () => {
@@ -76,7 +76,7 @@ function DiamondUpgrade({
     >
       <p className="upgrade__name">Diamond</p>
       <p className={money < calculateTotalCost() ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
-        {`$${calculateTotalCost()}`}
+        {`$${format(calculateTotalCost())}`}
       </p>
 
     </button>
@@ -89,6 +89,7 @@ DiamondUpgrade.propTypes = {
   multiplier: PropTypes.number.isRequired,
   update: PropTypes.func.isRequired,
   rebirth: PropTypes.number.isRequired,
+  format: PropTypes.func.isRequired,
 };
 
 export default DiamondUpgrade;

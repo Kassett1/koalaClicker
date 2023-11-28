@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function AutoDiamond({
-  setDiamond, multiplier, rebirth, money, setMoney,
+  setDiamond, multiplier, rebirth, money, setMoney, format,
 }) {
   const baseValue = 0;
-  const basePrice = 1000;
+  const basePrice = 500000;
 
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
   const [autoDiamond, setAutoDiamond] = useState({
@@ -76,7 +76,7 @@ function AutoDiamond({
     >
       <p className="upgrade__name">Auto Diamond</p>
       <p className={money < calculateTotalCost() ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
-        {`$${calculateTotalCost()}`}
+        {`$${format(calculateTotalCost())}`}
       </p>
     </button>
   );
@@ -88,6 +88,7 @@ AutoDiamond.propTypes = {
   rebirth: PropTypes.number.isRequired,
   money: PropTypes.number.isRequired,
   setMoney: PropTypes.func.isRequired,
+  format: PropTypes.func.isRequired,
 };
 
 export default AutoDiamond;

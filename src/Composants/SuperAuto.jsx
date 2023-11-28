@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function SuperAuto({
-  money, setMoney, multiplier, rebirth, intervalTime,
+  money, setMoney, multiplier, rebirth, intervalTime, format,
 }) {
   const baseValue = 0;
-  const basePrice = 1000;
+  const basePrice = 100000;
 
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
   const [autoClick, setAutoClick] = useState({
@@ -83,7 +83,7 @@ function SuperAuto({
     >
       <p className="upgrade__name">Super Auto</p>
       <p className={money < calculateTotalCost() ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
-        {`$${calculateTotalCost()}`}
+        {`$${format(calculateTotalCost())}`}
       </p>
     </button>
   );
@@ -95,6 +95,7 @@ SuperAuto.propTypes = {
   multiplier: PropTypes.number.isRequired,
   rebirth: PropTypes.number.isRequired,
   intervalTime: PropTypes.number.isRequired,
+  format: PropTypes.func.isRequired,
 };
 
 export default SuperAuto;

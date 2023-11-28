@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function AutoClick({
-  money, setMoney, multiplier, rebirth, intervalTime,
+  money, setMoney, multiplier, rebirth, intervalTime, format,
 }) {
   const baseValue = 0;
   const basePrice = 1000;
@@ -83,7 +83,7 @@ function AutoClick({
     >
       <p className="upgrade__name">Autoclick</p>
       <p className={money < calculateTotalCost() ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
-        {`$${calculateTotalCost()}`}
+        {`$${format(calculateTotalCost())}`}
       </p>
     </button>
   );
@@ -95,6 +95,7 @@ AutoClick.propTypes = {
   multiplier: PropTypes.number.isRequired,
   rebirth: PropTypes.number.isRequired,
   intervalTime: PropTypes.number.isRequired,
+  format: PropTypes.func.isRequired,
 };
 
 export default AutoClick;

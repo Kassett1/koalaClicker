@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function ClickUpgrade({
-  money, setMoney, multiplier, update, rebirth,
+  money, setMoney, multiplier, update, rebirth, format,
 }) {
-  const baseValue = 1000000;
+  const baseValue = 1;
   const basePrice = 50;
 
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
@@ -13,7 +13,6 @@ function ClickUpgrade({
     price: basePrice,
     count: 0,
   });
-
   const priceAugment = 1.03;
 
   // Calcul du coût total des améliorations en fonction du multiplicateur.
@@ -76,7 +75,7 @@ function ClickUpgrade({
     >
       <p className="upgrade__name">Click</p>
       <p className={money < calculateTotalCost() ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
-        {`$${calculateTotalCost()}`}
+        {`$${format(calculateTotalCost())}`}
       </p>
 
     </button>
@@ -89,6 +88,7 @@ ClickUpgrade.propTypes = {
   multiplier: PropTypes.number.isRequired,
   update: PropTypes.func.isRequired,
   rebirth: PropTypes.number.isRequired,
+  format: PropTypes.func.isRequired,
 };
 
 export default ClickUpgrade;

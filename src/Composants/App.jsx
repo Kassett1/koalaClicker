@@ -47,6 +47,23 @@ function App() {
     }, 1000);
   };
 
+  // Affiche les nombres avec des lettres
+  const formatNumber = (originalNum) => {
+    if (originalNum < 1000) {
+      return originalNum.toString();
+    }
+    let num = originalNum;
+    const units = ['K', 'M', 'B', 'T', 'Q', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ'];
+    let unitIndex = -1;
+
+    while (num >= 1000 && unitIndex < units.length - 1) {
+      num /= 1000;
+      unitIndex += 1;
+    }
+
+    return num.toFixed(2) + units[unitIndex];
+  };
+
   return (
     <main className="app">
       <section className="app__counters">
@@ -56,8 +73,13 @@ function App() {
           hueRotation={hueRotation}
           saturation={saturation}
           brightness={brightness}
+          format={formatNumber}
         />
-        <CounterDiamond diamond={diamond} className="app__diamonds" />
+        <CounterDiamond
+          diamond={diamond}
+          className="app__diamonds"
+          format={formatNumber}
+        />
       </section>
       <KoalaButton
         money={money}
@@ -89,6 +111,7 @@ function App() {
           multiplier={multiplier}
           update={setClickValue}
           rebirth={rebirthValue}
+          format={formatNumber}
         />
         <AutoClick
           className="app__autoClick"
@@ -98,6 +121,7 @@ function App() {
           rebirth={rebirthValue}
           setIntervalTime={setIntervalTime}
           intervalTime={IntervalTime}
+          format={formatNumber}
         />
         <DiamondUpgrade
           className="app__diamondUpgrade"
@@ -106,6 +130,7 @@ function App() {
           multiplier={multiplier}
           update={setDiamondUpgrade}
           rebirth={rebirthValue}
+          format={formatNumber}
         />
         <Rebirth
           className="app__rebirth"
@@ -113,6 +138,7 @@ function App() {
           setMoney={setMoney}
           multiplier={multiplier}
           update={setRebirthValue}
+          format={formatNumber}
         />
         <ColorChange
           className="app__colorChange"
@@ -129,6 +155,7 @@ function App() {
           multiplier={multiplier}
           update={setClickValue}
           rebirth={rebirthValue}
+          format={formatNumber}
         />
         <SuperAuto
           className="app__superauto"
@@ -138,6 +165,7 @@ function App() {
           rebirth={rebirthValue}
           setIntervalTime={setIntervalTime}
           intervalTime={IntervalTime}
+          format={formatNumber}
         />
         <AutoDiamond
           className="app__autoDiamond"
@@ -146,6 +174,7 @@ function App() {
           rebirth={rebirthValue}
           money={money}
           setMoney={setMoney}
+          format={formatNumber}
         />
         <PowerClick
           className="app__power-click"
@@ -153,6 +182,7 @@ function App() {
           setDiamond={setDiamond}
           clickValue={clickValue}
           setClickValue={setClickValue}
+          format={formatNumber}
         />
         <SpeedAutoClick
           className="app__speed-autoclick"
@@ -162,6 +192,7 @@ function App() {
           rebirth={rebirthValue}
           setIntervalTime={setIntervalTime}
           intervalTime={IntervalTime}
+          format={formatNumber}
         />
       </section>
     </main>

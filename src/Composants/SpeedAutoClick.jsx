@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 function SpeedAutoClick({
-  diamond, setDiamond, setIntervalTime, intervalTime,
+  diamond, setDiamond, setIntervalTime, intervalTime, format,
 }) {
-  const [speedPrice] = useState(10);
+  const [speedPrice] = useState(1000);
   const [isWorking, setIsWorking] = useState(false);
   const [prevIntervalTime, setPrevIntervalTime] = useState(0);
 
@@ -44,7 +44,7 @@ function SpeedAutoClick({
       <p className={diamond < speedPrice || isWorking ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
         <i className="fa-regular fa-gem" />
         {' '}
-        {speedPrice}
+        {format(speedPrice)}
       </p>
     </button>
   );
@@ -55,6 +55,7 @@ SpeedAutoClick.propTypes = {
   setDiamond: PropTypes.func.isRequired,
   setIntervalTime: PropTypes.func.isRequired,
   intervalTime: PropTypes.number.isRequired,
+  format: PropTypes.func.isRequired,
 };
 
 export default SpeedAutoClick;

@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function SuperClick({
-  money, setMoney, multiplier, update, rebirth,
+  money, setMoney, multiplier, update, rebirth, format,
 }) {
-  const baseValue = 1000000;
-  const basePrice = 50;
+  const baseValue = 1;
+  const basePrice = 50000;
 
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
   const [clickUpgrade, setClickUpgrade] = useState({
@@ -55,7 +55,9 @@ function SuperClick({
 
   // MAJ la valeur de l'amélioration dans App.
   useEffect(() => {
-    update(clickUpgrade.value);
+    if (clickUpgrade.count >= 1) {
+      update((prev) => (prev + clickUpgrade.value));
+    }
   }, [clickUpgrade.value]);
 
   useEffect(() => {
@@ -76,7 +78,7 @@ function SuperClick({
     >
       <p className="upgrade__name">Super Click</p>
       <p className={money < calculateTotalCost() ? 'upgrade__cost upgrade--cant-buy__cost' : 'upgrade__cost upgrade--buy__cost'}>
-        {`$${calculateTotalCost()}`}
+        {`$${format(calculateTotalCost())}`}
       </p>
 
     </button>
@@ -89,6 +91,7 @@ SuperClick.propTypes = {
   multiplier: PropTypes.number.isRequired,
   update: PropTypes.func.isRequired,
   rebirth: PropTypes.number.isRequired,
+  format: PropTypes.func.isRequired,
 };
 
 export default SuperClick;
