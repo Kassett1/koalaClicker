@@ -44,8 +44,10 @@ function Rebirth({
   };
 
   useEffect(() => {
-    update(rebirth.value);
-    setMoney(0);
+    if (rebirth.value > 1) {
+      update(rebirth.value);
+      setMoney(0);
+    }
   }, [rebirth.value]);
 
   return (

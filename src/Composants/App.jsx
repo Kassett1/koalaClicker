@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../style/css/reset.css';
 import '../style/css/main.css';
@@ -21,8 +21,14 @@ import SuperClick from './SuperClick';
 import SuperAuto from './SuperAuto';
 
 function App() {
-  const [money, setMoney] = useState(0);
-  const [diamond, setDiamond] = useState(0);
+  const [money, setMoney] = useState(() => {
+    const saved = localStorage.getItem('money');
+    return saved !== null ? JSON.parse(saved) : 0;
+  });
+  const [diamond, setDiamond] = useState(() => {
+    const saved = localStorage.getItem('diamond');
+    return saved !== null ? JSON.parse(saved) : 0;
+  });
   const [flyingKoalas, setFlyingKoalas] = useState([]);
   const [multiplier, setMultiplier] = useState(1);
   const [clickValue, setClickValue] = useState(1);
@@ -64,7 +70,14 @@ function App() {
     return num.toFixed(2) + units[unitIndex];
   };
 
+  useEffect(() => {
+    console.log(money);
+    localStorage.setItem('money', JSON.stringify(money));
+    localStorage.setItem('diamond', JSON.stringify(diamond));
+  }, [money, diamond]);
+
   return (
+    money !== null && (
     <main className="app">
       <section className="app__counters">
         <Counter
@@ -196,6 +209,7 @@ function App() {
         />
       </section>
     </main>
+    )
   );
 }
 
