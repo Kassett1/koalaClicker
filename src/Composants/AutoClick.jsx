@@ -2,20 +2,19 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function AutoClick({
-  money, setMoney, multiplier, rebirth, intervalTime, format,
+  money, setMoney, multiplier, rebirth, intervalTime, format, isFirstRebirth,
 }) {
   const baseValue = 0;
   const basePrice = 1000;
 
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
-  const [autoClick, setAutoClick] = useState({
-    value: baseValue,
-    price: basePrice,
-    count: 0,
+  const [autoClick, setAutoClick] = useState(() => {
+    const saved = localStorage.getItem('autoClick');
+    return saved !== null ? JSON.parse(saved) : { value: baseValue, price: basePrice, count: 0 };
   });
 
   const priceAugment = 1.05;
-  const autoClickPower = 10;
+  const autoClickPower = 100;
 
   // Référence pour maintenir la valeur actuelle de l'auto-click pour l'effet.
   const autoClickValueRef = useRef(autoClick.value);
@@ -60,19 +59,25 @@ function AutoClick({
 
   // Auto-click toutes les secondes.
   useEffect(() => {
-    setAutoClick((prev) => ({
-      ...prev,
-      value: baseValue,
-      price: basePrice,
-      count: 0,
-    }));
-    autoClickValueRef.current = baseValue;
+    if (!isFirstRebirth) {
+      setAutoClick((prev) => ({
+        ...prev,
+        value: baseValue,
+        price: basePrice,
+        count: 0,
+      }));
+      autoClickValueRef.current = baseValue;
+    }
   }, [rebirth]);
 
   useEffect(() => {
     const interval = setInterval(applyAutoClick, intervalTime);
     return () => clearInterval(interval);
   }, [intervalTime]);
+
+  useEffect(() => {
+    localStorage.setItem('autoClick', JSON.stringify(autoClick));
+  }, [autoClick]);
 
   return (
     <button
@@ -96,6 +101,7 @@ AutoClick.propTypes = {
   rebirth: PropTypes.number.isRequired,
   intervalTime: PropTypes.number.isRequired,
   format: PropTypes.func.isRequired,
+  isFirstRebirth: PropTypes.bool.isRequired,
 };
 
 export default AutoClick;

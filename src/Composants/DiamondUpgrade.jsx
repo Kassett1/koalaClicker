@@ -2,16 +2,15 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function DiamondUpgrade({
-  money, setMoney, multiplier, update, rebirth, format,
+  money, setMoney, multiplier, update, rebirth, format, isFirstRebirth,
 }) {
   const baseValue = 0;
   const basePrice = 5000;
 
-  // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
-  const [diamondUpgrade, setDiamondUpgrade] = useState({
-    value: baseValue,
-    price: basePrice,
-    count: 0,
+  // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.*
+  const [diamondUpgrade, setDiamondUpgrade] = useState(() => {
+    const saved = localStorage.getItem('diamondUpgrade');
+    return saved !== null ? JSON.parse(saved) : { value: baseValue, price: basePrice, count: 0 };
   });
 
   const priceAugment = 1.3;
@@ -59,13 +58,19 @@ function DiamondUpgrade({
   }, [diamondUpgrade.value]);
 
   useEffect(() => {
-    setDiamondUpgrade((prev) => ({
-      ...prev,
-      value: baseValue,
-      price: basePrice,
-      count: 0,
-    }));
+    if (!isFirstRebirth) {
+      setDiamondUpgrade((prev) => ({
+        ...prev,
+        value: baseValue,
+        price: basePrice,
+        count: 0,
+      }));
+    }
   }, [rebirth]);
+
+  useEffect(() => {
+    localStorage.setItem('diamondUpgrade', JSON.stringify(diamondUpgrade));
+  }, [diamondUpgrade]);
 
   return (
     <button
@@ -90,6 +95,7 @@ DiamondUpgrade.propTypes = {
   update: PropTypes.func.isRequired,
   rebirth: PropTypes.number.isRequired,
   format: PropTypes.func.isRequired,
+  isFirstRebirth: PropTypes.bool.isRequired,
 };
 
 export default DiamondUpgrade;

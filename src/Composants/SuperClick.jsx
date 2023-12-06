@@ -2,16 +2,15 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function SuperClick({
-  money, setMoney, multiplier, update, rebirth, format,
+  money, setMoney, multiplier, update, rebirth, format, isFirstRebirth,
 }) {
-  const baseValue = 1;
+  const baseValue = 0;
   const basePrice = 50000;
 
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
-  const [clickUpgrade, setClickUpgrade] = useState({
-    value: baseValue * rebirth * 10,
-    price: basePrice,
-    count: 0,
+  const [clickUpgrade, setClickUpgrade] = useState(() => {
+    const saved = localStorage.getItem('superClickUpgrade');
+    return saved !== null ? JSON.parse(saved) : { value: baseValue, price: basePrice, count: 0 };
   });
 
   const priceAugment = 1.03;
@@ -34,7 +33,7 @@ function SuperClick({
   const updateClickValue = (addedValue, newPrice) => {
     setClickUpgrade((prev) => ({
       ...prev,
-      value: prev.value + (addedValue * rebirth * 10),
+      value: prev.value + (addedValue * rebirth * 1000),
       price: newPrice,
       count: prev.count + addedValue,
     }));
@@ -61,13 +60,19 @@ function SuperClick({
   }, [clickUpgrade.value]);
 
   useEffect(() => {
-    setClickUpgrade((prev) => ({
-      ...prev,
-      value: baseValue * rebirth * 10,
-      price: basePrice,
-      count: 0,
-    }));
+    if (!isFirstRebirth) {
+      setClickUpgrade((prev) => ({
+        ...prev,
+        value: baseValue * rebirth,
+        price: basePrice,
+        count: 0,
+      }));
+    }
   }, [rebirth]);
+
+  useEffect(() => {
+    localStorage.setItem('superClickUpgrade', JSON.stringify(clickUpgrade));
+  }, [clickUpgrade]);
 
   return (
     <button
@@ -92,6 +97,7 @@ SuperClick.propTypes = {
   update: PropTypes.func.isRequired,
   rebirth: PropTypes.number.isRequired,
   format: PropTypes.func.isRequired,
+  isFirstRebirth: PropTypes.bool.isRequired,
 };
 
 export default SuperClick;

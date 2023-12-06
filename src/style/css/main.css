@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  background-color: #519FD6;
+  background-color: #63beff;
   font-family: "Fredoka", sans-serif;
   max-height: 100vh;
   position: relative;
@@ -48,7 +48,7 @@ img {
   gap: 1.5vw;
   justify-content: center;
   padding: 5vh 5vw;
-  background-color: #326285;
+  background-color: #17415f;
   box-shadow: 0 -0.4vh 0.5vw -0.3vw rgba(0, 0, 0, 0.5);
   position: relative;
   top: 2.2vh;
@@ -138,7 +138,7 @@ img {
   content: "";
   width: 40vw;
   height: 40vw;
-  background-color: #5EB9FA;
+  background-color: #39A4F1;
   border: 0.3vw solid white;
   border-radius: 50%;
   position: absolute;
@@ -261,7 +261,7 @@ img {
 }
 
 .upgrade--cant-buy {
-  background-color: #5EB9FA;
+  background-color: #39A4F1;
 }
 .upgrade--cant-buy__cost {
   color: #D9D9D9;

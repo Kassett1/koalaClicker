@@ -2,20 +2,19 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function SuperAuto({
-  money, setMoney, multiplier, rebirth, intervalTime, format,
+  money, setMoney, multiplier, rebirth, intervalTime, format, isFirstRebirth,
 }) {
   const baseValue = 0;
   const basePrice = 100000;
 
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
-  const [autoClick, setAutoClick] = useState({
-    value: baseValue * 10,
-    price: basePrice,
-    count: 0,
+  const [autoClick, setAutoClick] = useState(() => {
+    const saved = localStorage.getItem('superAutoClick');
+    return saved !== null ? JSON.parse(saved) : { value: baseValue, price: basePrice, count: 0 };
   });
 
   const priceAugment = 1.05;
-  const autoClickPower = 10;
+  const autoClickPower = 1;
 
   // Référence pour maintenir la valeur actuelle de l'auto-click pour l'effet.
   const autoClickValueRef = useRef(autoClick.value);
@@ -47,7 +46,7 @@ function SuperAuto({
     if (money >= totalCost) {
       setMoney(money - totalCost);
       const newPrice = Math.ceil(autoClick.price * (priceAugment ** multiplier));
-      const newValue = autoClick.value + (autoClickPower * multiplier * 10);
+      const newValue = autoClick.value + (autoClickPower * multiplier * 1000);
       setAutoClick((prev) => ({
         ...prev,
         value: newValue,
@@ -60,19 +59,25 @@ function SuperAuto({
 
   // Auto-click toutes les secondes.
   useEffect(() => {
-    setAutoClick((prev) => ({
-      ...prev,
-      value: baseValue * 10,
-      price: basePrice,
-      count: 0,
-    }));
-    autoClickValueRef.current = baseValue;
+    if (!isFirstRebirth) {
+      setAutoClick((prev) => ({
+        ...prev,
+        value: baseValue * 10,
+        price: basePrice,
+        count: 0,
+      }));
+      autoClickValueRef.current = baseValue;
+    }
   }, [rebirth]);
 
   useEffect(() => {
     const interval = setInterval(applyAutoClick, intervalTime);
     return () => clearInterval(interval);
   }, [intervalTime]);
+
+  useEffect(() => {
+    localStorage.setItem('superAutoClick', JSON.stringify(autoClick));
+  }, [autoClick]);
 
   return (
     <button
@@ -96,6 +101,7 @@ SuperAuto.propTypes = {
   rebirth: PropTypes.number.isRequired,
   intervalTime: PropTypes.number.isRequired,
   format: PropTypes.func.isRequired,
+  isFirstRebirth: PropTypes.bool.isRequired,
 };
 
 export default SuperAuto;

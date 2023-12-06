@@ -2,16 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function AutoDiamond({
-  setDiamond, multiplier, rebirth, money, setMoney, format,
+  setDiamond, multiplier, rebirth, money, setMoney, format, isFirstRebirth,
 }) {
   const baseValue = 0;
   const basePrice = 500000;
 
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
-  const [autoDiamond, setAutoDiamond] = useState({
-    value: baseValue,
-    price: basePrice,
-    count: 0,
+  const [autoDiamond, setAutoDiamond] = useState(() => {
+    const saved = localStorage.getItem('autoDiamond');
+    return saved !== null ? JSON.parse(saved) : { value: baseValue, price: basePrice, count: 0 };
   });
 
   const priceAugment = 1.05;
@@ -58,14 +57,20 @@ function AutoDiamond({
   }, []);
 
   useEffect(() => {
-    setAutoDiamond((prev) => ({
-      ...prev,
-      value: baseValue,
-      price: basePrice,
-      count: 0,
-    }));
-    autoDiamondValueRef.current = baseValue;
+    if (!isFirstRebirth) {
+      setAutoDiamond((prev) => ({
+        ...prev,
+        value: baseValue,
+        price: basePrice,
+        count: 0,
+      }));
+      autoDiamondValueRef.current = baseValue;
+    }
   }, [rebirth]);
+
+  useEffect(() => {
+    localStorage.setItem('autoDiamond', JSON.stringify(autoDiamond));
+  }, [autoDiamond]);
 
   return (
     <button
@@ -89,6 +94,7 @@ AutoDiamond.propTypes = {
   money: PropTypes.number.isRequired,
   setMoney: PropTypes.func.isRequired,
   format: PropTypes.func.isRequired,
+  isFirstRebirth: PropTypes.bool.isRequired,
 };
 
 export default AutoDiamond;

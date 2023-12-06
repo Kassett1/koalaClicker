@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 function Rebirth({
-  money, setMoney, multiplier, update, format,
+  money, setMoney, multiplier, update, format, setIsFirstRebirth,
 }) {
   const [rebirth, setRebirth] = useState({
     value: 1,
@@ -40,6 +40,7 @@ function Rebirth({
       const newPrice = Math.ceil(rebirth.price * (priceAugment ** multiplier));
 
       updateRebirthValue(multiplier, newPrice);
+      setIsFirstRebirth(false);
     }
   };
 
@@ -72,6 +73,7 @@ Rebirth.propTypes = {
   multiplier: PropTypes.number.isRequired,
   update: PropTypes.func.isRequired,
   format: PropTypes.func.isRequired,
+  setIsFirstRebirth: PropTypes.func.isRequired,
 };
 
 export default Rebirth;

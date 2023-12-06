@@ -31,13 +31,32 @@ function App() {
   });
   const [flyingKoalas, setFlyingKoalas] = useState([]);
   const [multiplier, setMultiplier] = useState(1);
-  const [clickValue, setClickValue] = useState(1);
-  const [rebirthValue, setRebirthValue] = useState(1);
+  const [clickValue, setClickValue] = useState(() => {
+    const saved = localStorage.getItem('clickValue');
+    return saved !== null ? JSON.parse(saved) : 1;
+  });
+  const [rebirthValue, setRebirthValue] = useState(() => {
+    const saved = localStorage.getItem('rebirth');
+    return saved !== null ? JSON.parse(saved) : 1;
+  });
   const [IntervalTime, setIntervalTime] = useState(1000);
-  const [hueRotation, setHueRotation] = useState(0);
-  const [saturation, setSaturation] = useState(1);
-  const [brightness, setBrightness] = useState(1);
-  const [diamondUpgrade, setDiamondUpgrade] = useState(0);
+  const [hueRotation, setHueRotation] = useState(() => {
+    const saved = localStorage.getItem('hue');
+    return saved !== null ? JSON.parse(saved) : 0;
+  });
+  const [saturation, setSaturation] = useState(() => {
+    const saved = localStorage.getItem('saturation');
+    return saved !== null ? JSON.parse(saved) : 1;
+  });
+  const [brightness, setBrightness] = useState(() => {
+    const saved = localStorage.getItem('brightness');
+    return saved !== null ? JSON.parse(saved) : 1;
+  });
+  const [diamondUpgrade, setDiamondUpgrade] = useState(() => {
+    const saved = localStorage.getItem('diamondUpgradeApp');
+    return saved !== null ? JSON.parse(saved) : 0;
+  });
+  const [isFirstRebirth, setIsFirstRebirth] = useState(true);
 
   // Fonction pour générer un FlyingKoala à l'écran
   const spawnFlyingKoala = () => {
@@ -71,10 +90,22 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(money);
     localStorage.setItem('money', JSON.stringify(money));
     localStorage.setItem('diamond', JSON.stringify(diamond));
-  }, [money, diamond]);
+    localStorage.setItem('clickValue', JSON.stringify(clickValue));
+    localStorage.setItem('rebirth', JSON.stringify(rebirthValue));
+    localStorage.setItem('hue', JSON.stringify(hueRotation));
+    localStorage.setItem('saturation', JSON.stringify(saturation));
+    localStorage.setItem('brightness', JSON.stringify(brightness));
+    localStorage.setItem('diamondUpgradeApp', JSON.stringify(diamondUpgrade));
+  }, [money,
+    diamond,
+    clickValue,
+    rebirthValue,
+    hueRotation,
+    saturation,
+    brightness,
+    diamondUpgrade]);
 
   return (
     money !== null && (
@@ -125,6 +156,7 @@ function App() {
           update={setClickValue}
           rebirth={rebirthValue}
           format={formatNumber}
+          isFirstRebirth={isFirstRebirth}
         />
         <AutoClick
           className="app__autoClick"
@@ -135,6 +167,7 @@ function App() {
           setIntervalTime={setIntervalTime}
           intervalTime={IntervalTime}
           format={formatNumber}
+          isFirstRebirth={isFirstRebirth}
         />
         <DiamondUpgrade
           className="app__diamondUpgrade"
@@ -144,6 +177,7 @@ function App() {
           update={setDiamondUpgrade}
           rebirth={rebirthValue}
           format={formatNumber}
+          isFirstRebirth={isFirstRebirth}
         />
         <Rebirth
           className="app__rebirth"
@@ -152,6 +186,7 @@ function App() {
           multiplier={multiplier}
           update={setRebirthValue}
           format={formatNumber}
+          setIsFirstRebirth={setIsFirstRebirth}
         />
         <ColorChange
           className="app__colorChange"
@@ -169,6 +204,7 @@ function App() {
           update={setClickValue}
           rebirth={rebirthValue}
           format={formatNumber}
+          isFirstRebirth={isFirstRebirth}
         />
         <SuperAuto
           className="app__superauto"
@@ -179,6 +215,7 @@ function App() {
           setIntervalTime={setIntervalTime}
           intervalTime={IntervalTime}
           format={formatNumber}
+          isFirstRebirth={isFirstRebirth}
         />
         <AutoDiamond
           className="app__autoDiamond"
@@ -188,6 +225,7 @@ function App() {
           money={money}
           setMoney={setMoney}
           format={formatNumber}
+          isFirstRebirth={isFirstRebirth}
         />
         <PowerClick
           className="app__power-click"

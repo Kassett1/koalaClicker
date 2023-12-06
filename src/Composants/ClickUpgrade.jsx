@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function ClickUpgrade({
-  money, setMoney, multiplier, update, rebirth, format,
+  money, setMoney, multiplier, update, rebirth, format, isFirstRebirth,
 }) {
   const baseValue = 1;
   const basePrice = 50;
 
   // État pour stocker la valeur actuelle, le prix et le nombre d'améliorations achetées.
-  const [clickUpgrade, setClickUpgrade] = useState({
-    value: baseValue * rebirth,
-    price: basePrice,
-    count: 0,
+  const [clickUpgrade, setClickUpgrade] = useState(() => {
+    const saved = localStorage.getItem('clickUpgrade');
+    return saved !== null ? JSON.parse(saved) : { value: baseValue, price: basePrice, count: 0 };
   });
+
   const priceAugment = 1.03;
 
   // Calcul du coût total des améliorations en fonction du multiplicateur.
@@ -58,13 +58,19 @@ function ClickUpgrade({
   }, [clickUpgrade.value]);
 
   useEffect(() => {
-    setClickUpgrade((prev) => ({
-      ...prev,
-      value: baseValue * rebirth,
-      price: basePrice,
-      count: 0,
-    }));
+    if (!isFirstRebirth) {
+      setClickUpgrade((prev) => ({
+        ...prev,
+        value: baseValue * rebirth,
+        price: basePrice,
+        count: 0,
+      }));
+    }
   }, [rebirth]);
+
+  useEffect(() => {
+    localStorage.setItem('clickUpgrade', JSON.stringify(clickUpgrade));
+  }, [clickUpgrade]);
 
   return (
     <button
@@ -89,6 +95,7 @@ ClickUpgrade.propTypes = {
   update: PropTypes.func.isRequired,
   rebirth: PropTypes.number.isRequired,
   format: PropTypes.func.isRequired,
+  isFirstRebirth: PropTypes.bool.isRequired,
 };
 
 export default ClickUpgrade;

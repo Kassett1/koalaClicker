@@ -6,7 +6,6 @@ function KoalaButton({
   setMoney,
   diamond,
   setDiamond,
-  spawn,
   click,
   hueRotation,
   saturation,
@@ -32,7 +31,7 @@ function KoalaButton({
   // Fonction pour incrémenter la money et les diamants
   const incrementMoney = () => {
     setMoney(money + click);
-    spawn();
+    // spawn();  désactivé car pas utile mais laissé car intéressant
     setDiamond(diamond + generateDiamond());
   };
 
@@ -55,6 +54,7 @@ KoalaButton.propTypes = {
   setMoney: PropTypes.func.isRequired,
   diamond: PropTypes.number.isRequired,
   setDiamond: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/no-unused-prop-types
   spawn: PropTypes.func.isRequired,
   click: PropTypes.number.isRequired,
   hueRotation: PropTypes.number.isRequired,
