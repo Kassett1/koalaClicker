@@ -38,7 +38,7 @@ function KoalaButton({
   return (
     <div className="koala-button">
       <img
-        src="/images/koala.png"
+        src="images/koala.png"
         alt="Clickable Koala"
         onClick={incrementMoney}
         className="koala-button__img"

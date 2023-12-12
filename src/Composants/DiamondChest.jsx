@@ -58,7 +58,7 @@ function DiamondChest({ diamond, setDiamond }) {
   return (
     <div className="diamond-chest">
       <img
-        src="/images/chest.png"
+        src="images/chest.png"
         alt="chest"
         onClick={handleClick}
         className={isClickable ? 'diamond-chest__img' : 'diamond-chest__img--disable'}

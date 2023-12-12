@@ -10,7 +10,7 @@ function Counter({
     >
       <p className="counter__money">{format(money)}</p>
       <img
-        src="/images/teteKoala.png"
+        src="images/teteKoala.png"
         alt="money"
         className="counter__img"
         draggable="false"
