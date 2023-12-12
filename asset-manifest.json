@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/koalaClicker/static/css/main.9aa04be3.css",
+    "main.js": "/koalaClicker/static/js/main.7e9c9edc.js",
+    "static/js/787.ee8008af.chunk.js": "/koalaClicker/static/js/787.ee8008af.chunk.js",
+    "static/media/grass.png": "/koalaClicker/static/media/grass.ef406a68abfc621d57cf.png",
+    "static/media/stars.gif": "/koalaClicker/static/media/stars.305a22a0878cebdf10ad.gif",
+    "index.html": "/koalaClicker/index.html",
+    "main.9aa04be3.css.map": "/koalaClicker/static/css/main.9aa04be3.css.map",
+    "main.7e9c9edc.js.map": "/koalaClicker/static/js/main.7e9c9edc.js.map",
+    "787.ee8008af.chunk.js.map": "/koalaClicker/static/js/787.ee8008af.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9aa04be3.css",
+    "static/js/main.7e9c9edc.js"
+  ]
+}
