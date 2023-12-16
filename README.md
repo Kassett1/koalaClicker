@@ -81,5 +81,6 @@ Koala Clicker a été développé en utilisant les technologies suivantes :
 - **React**
 - **BEM (Block, Element, Modifier)**
 - **SCSS (Sassy CSS)**
+- **ESLint avec le style guide AirBnB** 
 
 En utilisant ces technologies, nous avons pu créer une expérience de jeu interactive et agréable pour les joueurs de Koala Clicker.
