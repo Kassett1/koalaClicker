@@ -30,7 +30,7 @@ Un jeu clicker est un jeu où vous cliquez pour gagner une monnaie virtuelle, qu
 
 Cliquez sur mon koala pour commencer à jouer !
 
-## Améliorations Disponibles
+## Fonctionnalités Disponibles
 
 Dans Koala Clicker, vous trouverez les améliorations suivantes pour améliorer votre expérience de jeu :
 
